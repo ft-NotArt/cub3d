@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/03 20:17:51 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/03 22:17:47 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 // TODO free
 
-void	check_for_spaces(char *map)
+void	send_lines_to_parsing(char *map_in_line)
 {
-	int i = 0;
-	while (map[i] != '\n')
+	int	i;
+
+	i = 0;
+	while (ft_isspace(map_in_line[i]))
 	{
 		i++;
 	}
-	printf("%c\n", map[i - 1]);
-	printf("%d\n", i);
+	if (ft_strncmp(map_in_line, "NO", 2) == 0 || ft_strncmp(map_in_line, "SO", 2) == 0 || ft_strncmp(map_in_line, "WE", 2) == 0 || ft_strncmp(map_in_line, "EA", 2) == 0)
+	{
+		printf("map texture on first line");
+	}
 }
 
 char	**get_map(char *filename)
@@ -40,6 +44,29 @@ char	**get_map(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "F", 1) == 0 || ft_strncmp(line, "C", 1) == 0)
+		{
+			printf("map texture on first line\n");
+		}
+		else if (line[0] == '\n')
+		{
+			printf("%s", line);
+		}
+		else if (is_map_charset(line[0]))
+		{
+			while (line)
+			{
+				if (line[0] == '\n')
+				{
+					printf("Error");
+					free(line);
+					return NULL;
+				}
+				printf("%s", line);
+				line = get_next_line(fd);
+			}
+			// printf("%s", line);
+		}
 		temp = ft_strjoin(map_in_line, line);
 		map_in_line = temp;
 		line = get_next_line(fd);
@@ -48,6 +75,6 @@ char	**get_map(char *filename)
 	// printf("%s", map_in_line);
 	// print_map(map);
 	printf("%s", map_in_line);
-	check_for_spaces(map_in_line);
+	// send_lines_to_parsing(map_in_line);
 	return (map);
 }
