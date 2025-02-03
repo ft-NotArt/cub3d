@@ -28,7 +28,10 @@ LFLAGS			=	-ldl -lglfw -lm												\
 
 # FILES
 
-FILES			=	cub3d														\
+FILES			=	cub3d					\
+					parsing/parsing 		\
+					parsing/args_checker 	\
+					parsing/debug			\
 \
 					game/raycasting/raycasting game/raycasting/raycasting_calc	\
 					game/raycasting/raycasting_background						\
@@ -40,7 +43,7 @@ FILES			=	cub3d														\
 					structs/init structs/init2 structs/free						\
 \
 					utils/utils utils/exit										\
-\
+					parsing/map_checker		\
 
 SRC				=	$(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ				=	$(addprefix src/, $(addsuffix .o, $(FILES)))

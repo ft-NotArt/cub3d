@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 19:25:16 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:25:17 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,21 @@ void		free_cub3d(t_cub3d *cub3d);
 // Close
 void		close_success(void *param);
 void		close_failure(void *param);
+
+// ? PARSING
+
+typedef	struct	s_parsing
+{
+	char		**map;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+}				t_parsing;
+
+bool		args_checker(int ac, char **av);
+void		print_map(char **map);
+char		**get_map(char *filename);
+
 
 #endif
