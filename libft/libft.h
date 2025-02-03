@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
+/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 07:14:00 by anoteris          #+#    #+#             */
-/*   Updated: 2025/01/23 06:53:40 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:15:07 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 // <|===|> Is <|===|>
 
@@ -162,7 +163,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
  * @name strdup
  * @brief Takes a string and return a copy of that string
  * that have been allocated on heap
- * @param s 
+ * @param s
  * @return A copy of s, allocated on heap
  * @author NotArt
  */
@@ -276,6 +277,14 @@ char			**str_array_insert(char **array, char *to_insert, int index);
  * @author NotArt
  */
 void			str_array_erase(char **array, int index);
+
+/**
+ * @name check_extension
+ * @param filename String in which to check for file extension
+ * @param extension The extension to check for
+ * @author kaveO
+ */
+bool			check_extension(char *filename, char *extension);
 
 // <|===|> Mem <|===|>
 

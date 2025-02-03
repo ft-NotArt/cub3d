@@ -1,7 +1,7 @@
 # COLORS
 
 ORANGE			=	\x1b[0m\x1b[38;2;255;127;0m
-LIGHT_ORANGE	=	\x1b[1m\x1b[38;2;198;92;137m
+LIGHT_ORANGE	=	\x1b[1m\x1b[38;2;255;165;77m
 DARK_ORANGE		=	\x1b[0m\x1b[38;2;179;89;0m
 WHITE			=	\x1b[0m\x1b[38;2;255;255;255m
 

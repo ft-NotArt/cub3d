@@ -29,6 +29,7 @@ FILES			=	is/ft_isalnum is/ft_isdigit is/ft_isalpha				\
 					str/ft_strmapi str/ft_striteri							\
 					str/ft_toupper str/ft_tolower							\
 					str/str_array_insert str/str_array_erase				\
+					str/check_extension										\
 \
 					mem/ft_memset mem/ft_bzero								\
 					mem/ft_memcpy mem/ft_memmove							\
