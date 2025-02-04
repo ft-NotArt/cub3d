@@ -20,7 +20,7 @@ LIBMLX 			=	$(MLX)/build/libmlx42.a
 
 MAKEFLAGS		+=	-s
 CFLAGS			=	-Wall -Werror -Wextra -g -pthread							\
-					-Iinc -Ilibft -Ilibft/gnl -IMLX42/include					\
+					-Iinc -Ilibft -Ilibft/gnl -IMLX42/include -Ilibft/printf/ft_printf_fd					\
 					-D SCREENWIDTH=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f1)	\
 					-D SCREENHEIGHT=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f2)	\
 

@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/04 21:06:33 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/04 23:48:47 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,34 @@
 
 // TODO free
 
-char	*get_texture_path(char *line, int c, int c1)
+char	*get_texture_path(char *line, char c, char c1)
 {
 	int		i;
 	char	*temp;
+	char	*path;
 
 	i = 0;
 	temp = ft_strtrim(line, " ");
 	free(line);
 	if (temp[i] != c || temp[i + 1] != c1)
 	{
-		free(temp);
-		return NULL;
+		ft_printf_fd(2, "Error\nInvalid character on %c%c texture line\n",
+				c, c1);
+		return (NULL);
 	}
 	i += 2;
 	while (temp[i] && ft_isspace(temp[i]))
 		i++;
+	path = malloc(10000);
+	int j = 0;
 	while (temp[i] && !ft_isspace(temp[i]))
 	{
-		printf("%c", temp[i]);
+		path[j] = temp[i];
 		i++;
+		j++;
 	}
-	return (NULL);
+	path[j] = '\0';
+	return (path);
 }
 
 void	parse_by_id(t_id id, t_parsing *parsing, char *line)
@@ -45,7 +51,7 @@ void	parse_by_id(t_id id, t_parsing *parsing, char *line)
 	else if (id == SOUTH)
 		parsing->so_path = get_texture_path(line, 'S', 'O');
 	else if (id == EAST)
-		parsing->we_path = get_texture_path(line, 'E', 'E');
+		parsing->we_path = get_texture_path(line, 'E', 'A');
 	else if (id == WEST)
 		parsing->ea_path = get_texture_path(line, 'W', 'E');
 	// else if (id == )
@@ -79,6 +85,38 @@ int	get_identifier_id(char *line)
 // 	}
 // }
 
+
+void	parse_map(char **map, t_parsing *parsing)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (is_map_identifier(map[i]))
+		{
+			parse_by_id(get_identifier_id(map[i]), parsing, map[i]);
+		}
+		else if (map[i][0] == '\n')
+		{
+		}
+		else if (is_map_charset(map[i]))
+		{
+			while (map[i])
+			{
+				if (map[i][0] == '\n' || !is_map_charset(map[i]))
+				{
+					printf("%s\n", map[i]);
+					printf("Error\n");
+					exit(1);
+				}
+				i++;
+			}
+		}
+		i++;
+	}
+}
+
 char	**get_map(char *filename, t_parsing *parsing)
 {
 	int		fd;
@@ -86,6 +124,8 @@ char	**get_map(char *filename, t_parsing *parsing)
 	char	*line;
 	char	*map_in_line;
 	char	*temp;
+
+	(void) parsing;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -96,15 +136,10 @@ char	**get_map(char *filename, t_parsing *parsing)
 	{
 		if (is_map_identifier(line))
 		{
-			printf("%s", line);
 			parse_by_id(get_identifier_id(line), parsing, line);
-			free(map_in_line);
-			break;
-			// parse_identifier(line, parsing);
 		}
 		else if (line[0] == '\n')
 		{
-
 		}
 		else if (is_map_charset(line))
 		{
@@ -123,5 +158,8 @@ char	**get_map(char *filename, t_parsing *parsing)
 		map_in_line = temp;
 		line = get_next_line(fd);
 	}
+	map = ft_split(map_in_line, '\n');
+	print_map(map);
+	parse_map(map, parsing);
 	return (map);
 }

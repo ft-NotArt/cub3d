@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 07:14:00 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/03 15:15:07 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/04 21:50:57 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include "printf/ft_printf_fd/ft_printf_fd.h"
 
 // <|===|> Is <|===|>
 

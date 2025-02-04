@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:35:23 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/03 18:36:57 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/04 22:50:19 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,12 @@ void	print_map(char **map)
 		printf("%s\n", map[i]);
 		i++;
 	}
+}
+
+void	print_paths(t_parsing *parsing)
+{
+	printf("%s\n", parsing->no_path);
+	printf("%s\n", parsing->so_path);
+	printf("%s\n", parsing->we_path);
+	printf("%s\n", parsing->ea_path);
 }

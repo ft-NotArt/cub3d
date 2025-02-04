@@ -65,6 +65,11 @@ FILES			=	is/ft_isalnum is/ft_isdigit is/ft_isalpha				\
 					printf/ft_printf_field_address							\
 					printf/ft_printf_write_flag								\
 \
+					printf/ft_printf_fd/ft_printf_fd_hex					\
+					printf/ft_printf_fd/ft_printf_fd_ptr					\
+					printf/ft_printf_fd/ft_printf_fd_utils					\
+					printf/ft_printf_fd/ft_printf_fd						\
+\
 					gnl/get_next_line										\
 \
 

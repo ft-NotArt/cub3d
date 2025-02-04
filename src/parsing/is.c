@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:45:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/04 20:43:19 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/04 23:18:42 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ bool	is_map_charset(char *line)
 
 bool	is_map_identifier(char *line)
 {
-	if (ft_strnstr(line, "NO", ft_strlen(line)) || ft_strnstr(line, "SO", 2)
-		|| ft_strnstr(line, "WE", 2) || ft_strnstr(line, "EA", 2)
-		|| ft_strnstr(line, "F", 1) || ft_strnstr(line, "C", 1))
+	if (ft_strnstr(line, "NO", ft_strlen(line)) || ft_strnstr(line, "SO", ft_strlen(line))
+		|| ft_strnstr(line, "WE", ft_strlen(line)) || ft_strnstr(line, "EA", ft_strlen(line))
+		|| ft_strnstr(line, "F", ft_strlen(line)) || ft_strnstr(line, "C", ft_strlen(line)))
 	{
 		return (true);
 	}

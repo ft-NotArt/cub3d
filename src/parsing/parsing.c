@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/04 21:07:06 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/04 23:17:42 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int main(int ac, char **av)
 	parsing = init_parsing_struct(av[1]);
 	(void) parsing;
 	get_map(av[1], parsing);
+	// print_paths(parsing);
 	free(parsing);
 }
