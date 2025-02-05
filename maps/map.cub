@@ -1,21 +1,25 @@
-                 NO ./path_to_the_north_texture
+                 NO efdfdfd
 SO ./path_to_the_south_texture
 
 
 
-WE ./path_to_the_west_texture
+               			 WE ./path_to_the_west_texture
+
+   			 DO ./path_to_the_door_texture
+
+
+			F 		./path_to_the_floor_texture
+ 	EA 			./path_to_the_east_texture
 
 
 
-EA ./path_to_the_east_texture
+	NO 
 
-DO JSFHSHJFSHFSJHFS
-
-
-F ./jesuisla
+C ./path_to_the_ceilling_texture
 
 
-C ./lpfsjfs
+ 	EA 			./testjhsjht
+
 
 
 1111111111111111111111111

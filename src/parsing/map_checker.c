@@ -3,57 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 11:04:32 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/05 21:14:47 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static bool	count_path_words(char *line)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		while (ft_isspace(line[i]))
+			i++;
+		if (line[i])
+			count++;
+		while (line[i] && !ft_isspace(line[i]))
+			i++;
+	}
+	if (count != 2)
+		return (false);
+	return (true);
+}
+
+static int	get_path_len(char *temp)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (!ft_isspace(temp[i]))
+		i++;
+	while (ft_isspace(temp[i]))
+		i++;
+	while (!ft_isspace(temp[i]))
+	{
+		i++;
+		len++;
+	}
+	return (len);
+}
+
+// static char	*get_trimmed_line(char *line)
+// {
+// 	char	*temp;
+
+// 	temp = ft_strtrim(line, " ,	");
+
+
+// 	return (temp);
+// }
+
 char	*get_texture_path(char *line, char c, char c1)
 {
 	int		i;
+	int		j;
 	char	*temp;
 	char	*path;
 
-	i = 0;
-	temp = ft_strtrim(line, " ");
+	if (!count_path_words(line))
+	{
+		ft_printf_fd(2, "Error\nInvalid words count on %c%c texture line\n", c, c1);
+		exit(EXIT_FAILURE);
+	}
+	temp = ft_strtrim(line, " ,	");
 	free(line);
+	i = 0;
 	if (temp[i] != c || temp[i + 1] != c1)
 	{
-		ft_printf_fd(2, "Error\nInvalid character on %c%c texture line\n",
-				c, c1);
+		ft_printf_fd(2, "Error\nInvalid character on %c%c texture line\n", c, c1);
 		exit(1);
 	}
 	i += 2;
 	while (temp[i] && ft_isspace(temp[i]))
 		i++;
-	path = malloc(ft_strlen(temp + i) + 1);
-	int j = 0;
+	path = malloc(sizeof(char *) + (get_path_len(temp)));
+	j = 0;
 	while (temp[i] && !ft_isspace(temp[i]))
-	{
-		path[j] = temp[i];
-		i++;
-		j++;
-	}
+		path[j++] = temp[i++];
 	path[j] = '\0';
+	free(temp);
 	return (path);
 }
 
 void	parse_by_id(t_txtr_id id, t_parsing *parsing, char *line)
 {
-	(void) line;
-	// parsing->paths[NO]  = "test";
-	// printf("%s", parsing->paths[NO]);
 	if (id == NO)
-	{
-		// printf("Error\n");
-		// printf("%s\n", get_texture_path(line, 'N', 'O'));
 		parsing->paths[NO] = get_texture_path(line, 'N', 'O');
-		// printf("%s\n", parsing->paths[NO]);
-	}
 	else if (id == SO)
 		parsing->paths[SO] = get_texture_path(line, 'S', 'O');
 	else if (id == WE)
@@ -114,15 +158,15 @@ char	**get_map_data(char *filename, t_parsing *parsing)
 				map_in_line = temp;
 				if (line[0] == '\n' || !is_map_charset(line))
 				{
-					printf("Error\n");
+					ft_printf_fd(2, "Error\nNewlines inside the map !\n");
 					exit(1);
 				}
+				free(line);
 				line = get_next_line(fd);
 			}
-			map = ft_split(map_in_line, '\n');
-			print_map(map);
 		}
 		line = get_next_line(fd);
 	}
+	map = ft_split(map_in_line, '\n');
 	return (map);
 }

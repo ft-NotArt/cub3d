@@ -44,7 +44,8 @@ FILES			=	cub3d					\
 \
 					utils/utils utils/exit										\
 					parsing/map_checker		\
-					parsing/is
+					parsing/is				\
+					parsing/free			\
 
 SRC				=	$(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ				=	$(addprefix src/, $(addsuffix .o, $(FILES)))

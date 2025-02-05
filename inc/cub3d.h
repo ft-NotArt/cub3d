@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:28:53 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:29:02 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ char		**get_map_data(char *filename, t_parsing *parsing);
 bool		is_map_charset(char *line);
 bool		is_map_identifier(char *line);
 void		print_paths(t_parsing *parsing);
+void		free_parsing(t_parsing *parsing);
 
 
 #endif
