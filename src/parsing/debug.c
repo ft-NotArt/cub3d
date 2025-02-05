@@ -6,7 +6,7 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:35:23 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/04 22:50:19 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/05 11:04:50 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ void	print_map(char **map)
 
 void	print_paths(t_parsing *parsing)
 {
-	printf("%s\n", parsing->no_path);
-	printf("%s\n", parsing->so_path);
-	printf("%s\n", parsing->we_path);
-	printf("%s\n", parsing->ea_path);
+	printf("%s\n", parsing->paths[NO]);
+	printf("%s\n", parsing->paths[SO]);
+	printf("%s\n", parsing->paths[WE]);
+	printf("%s\n", parsing->paths[EA]);
+	printf("%s\n", parsing->paths[DO]);
+	printf("%s\n", parsing->paths[FL]);
+	printf("%s\n", parsing->paths[CE]);
 }

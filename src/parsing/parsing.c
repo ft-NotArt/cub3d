@@ -6,13 +6,13 @@
 /*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/04 23:17:42 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/05 11:13:32 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_parsing	*init_parsing_struct(char *filename)
+t_parsing	*init_parsing(char *filename)
 {
 	t_parsing	*parsing;
 
@@ -20,15 +20,12 @@ t_parsing	*init_parsing_struct(char *filename)
 	parsing = malloc(sizeof(t_parsing));
 	if (!parsing)
 		return (NULL);
-	parsing->ea_path = NULL;
-	parsing->no_path = NULL;
-	parsing->so_path = NULL;
-	parsing->we_path = NULL;
+	parsing->paths = malloc(8 * sizeof(char *));
+	// ft_bzero(parsing->paths)
 	// parsing->map = get_map(filename);
 	parsing->map = NULL; // TODO change later
 	return (parsing);
 }
-
 
 int main(int ac, char **av)
 {
@@ -36,9 +33,9 @@ int main(int ac, char **av)
 
 	if (!args_checker(ac, av))
 		exit(1);
-	parsing = init_parsing_struct(av[1]);
+	parsing = init_parsing(av[1]);
 	(void) parsing;
-	get_map(av[1], parsing);
-	// print_paths(parsing);
+	get_map_data(av[1], parsing);
+	print_paths(parsing);
 	free(parsing);
 }

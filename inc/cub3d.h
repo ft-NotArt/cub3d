@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:27:11 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:28:53 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,28 +162,26 @@ void		close_failure(void *param);
 
 // ? PARSING
 
-typedef enum	s_id
+typedef enum	s_txtr_id
 {
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-	CEILLING,
-	FLOOR,
-}				t_id;
+	NO,
+	SO,
+	WE,
+	EA,
+	DO,
+	FL,
+	CE,
+}				t_txtr_id;
 
 typedef	struct	s_parsing
 {
 	char		**map;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
+	char		**paths;
 }				t_parsing;
 
 bool		args_checker(int ac, char **av);
 void		print_map(char **map);
-char		**get_map(char *filename, t_parsing *parsing);
+char		**get_map_data(char *filename, t_parsing *parsing);
 bool		is_map_charset(char *line);
 bool		is_map_identifier(char *line);
 void		print_paths(t_parsing *parsing);
