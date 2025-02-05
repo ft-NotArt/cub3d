@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:08:07 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 20:01:13 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:08 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
 	raycast->door = true ;
 	if (cub3d->map[raycast->map->y][raycast->map->x] == '1')
 		raycast->door = false ;
-	else if (cub3d->map[raycast->map->y][raycast->map->x] == 'D')
-		cub3d->map[raycast->map->y][raycast->map->x] = 'd' ;
-	else if (cub3d->map[raycast->map->y][raycast->map->x] == 'd')
-		cub3d->map[raycast->map->y][raycast->map->x] = 'D' ;
 }
 
 void	raycast_to_door(t_cub3d *cub3d)
@@ -57,5 +53,17 @@ void	raycast_to_door(t_cub3d *cub3d)
 	calc_deltaDist(raycast);
 	calc_step_and_sideDist(raycast);
 	DDA_algo_on_door(cub3d, raycast);
+	if(raycast->side == EA || raycast->side == WE)
+		raycast->perpWallDist = (raycast->sideDist->x - raycast->deltaDist->x);
+	else
+		raycast->perpWallDist = (raycast->sideDist->y - raycast->deltaDist->y);
+	if (raycast->perpWallDist < 2)
+	{
+		if (cub3d->map[raycast->map->y][raycast->map->x] == 'D')
+			cub3d->map[raycast->map->y][raycast->map->x] = 'd' ;
+		else if (cub3d->map[raycast->map->y][raycast->map->x] == 'd')
+			cub3d->map[raycast->map->y][raycast->map->x] = 'D' ;
+	}
+	printf(" \t %f \n", raycast->perpWallDist);
 	// draw_line(cub3d, raycast, x);
 }
