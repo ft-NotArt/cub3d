@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 18:16:01 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:18:19 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef struct s_cub3d
 // Game
 void		frame_loop(void *param);
 void		keyboard_hook(mlx_key_data_t keydata, void *param);
-void		cursor_hook(double xpos, double ypos, void* param);
 void		mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods,
 	void *param);
 void		move(t_cub3d *cub3d, double dir1, double dir2, double move_speed);
@@ -123,7 +122,7 @@ void		draw_crosshair(t_cub3d *cub3d);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);
-void		raycast_to_door(t_cub3d *cub3d);
+void		raycast_to_door(t_cub3d *cub3d, bool AWP);
 void		draw_background(t_cub3d *cub3d, t_raycast *raycast,
 	mlx_image_t *floor, mlx_image_t *ceilling);
 void		calc_deltaDist(t_raycast *raycast);

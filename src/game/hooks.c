@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:39:22 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 18:18:27 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:18:11 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,7 @@ void	keyboard_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE)
 		close_success(cub3d);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-	{
-		raycast_to_door(cub3d);
-	}
-	// TODO: Shoot a bullet w/ AWP (maybe in loop_hook)
-}
-
-void	cursor_hook(double xpos, double ypos, void* param)
-{
-	t_cub3d	*cub3d ;
-
-	(void) ypos ;
-	cub3d = (t_cub3d *) param ;
-	rotate(cub3d, -ROT_SPEED * (xpos - (SCREENWIDTH / 2)) * 0.03);
-	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));
+		raycast_to_door(cub3d, false);
 }
 
 // TODO: This should be function that can trigger AWP anim
@@ -72,14 +59,9 @@ void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods,
 	void *param)
 {
 	t_cub3d	*cub3d ;
-	int32_t	x ;
-	int32_t	y ;
 
-	(void) button ;
-	(void) action ;
 	(void) mods ;
 	cub3d = (t_cub3d *) param ;
-	mlx_get_mouse_pos(cub3d->mlx, &x, &y);
-	// rotate(cub3d, -ROT_SPEED * (x - (SCREENWIDTH / 2)));
-	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+		raycast_to_door(cub3d, true);
 }

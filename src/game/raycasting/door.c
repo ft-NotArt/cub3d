@@ -6,13 +6,13 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:08:07 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:08 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:27:35 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
+static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast, bool AWP)
 {
 	bool	hit ;
 
@@ -33,7 +33,7 @@ static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
 		}
 		if (cub3d->map[raycast->map->y][raycast->map->x] == '1'
 			|| cub3d->map[raycast->map->y][raycast->map->x] == 'D'
-			|| cub3d->map[raycast->map->y][raycast->map->x] == 'd')
+			|| (cub3d->map[raycast->map->y][raycast->map->x] == 'd' && !AWP))
 			hit = true ;
 	}
 	raycast->door = true ;
@@ -41,18 +41,17 @@ static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
 		raycast->door = false ;
 }
 
-void	raycast_to_door(t_cub3d *cub3d)
+static void	AWP_shot(t_cub3d *cub3d)
 {
-	t_raycast	*raycast ;
+	t_point	*map ;
 
-	raycast = cub3d->raycast ;
-	raycast->map->x = (int) raycast->pos->x ;
-	raycast->map->y = (int) raycast->pos->y ;
-	raycast->rayDir->x = raycast->dir->x;
-	raycast->rayDir->y = raycast->dir->y;
-	calc_deltaDist(raycast);
-	calc_step_and_sideDist(raycast);
-	DDA_algo_on_door(cub3d, raycast);
+	map = cub3d->raycast->map ;
+	if (cub3d->map[map->y][map->x] == 'D')
+		cub3d->map[map->y][map->x] = '0' ;
+}
+
+static void	open_or_close_door(t_cub3d *cub3d, t_raycast *raycast)
+{
 	if(raycast->side == EA || raycast->side == WE)
 		raycast->perpWallDist = (raycast->sideDist->x - raycast->deltaDist->x);
 	else
@@ -64,6 +63,22 @@ void	raycast_to_door(t_cub3d *cub3d)
 		else if (cub3d->map[raycast->map->y][raycast->map->x] == 'd')
 			cub3d->map[raycast->map->y][raycast->map->x] = 'D' ;
 	}
-	printf(" \t %f \n", raycast->perpWallDist);
-	// draw_line(cub3d, raycast, x);
+}
+
+void	raycast_to_door(t_cub3d *cub3d, bool AWP)
+{
+	t_raycast	*raycast ;
+
+	raycast = cub3d->raycast ;
+	raycast->map->x = (int) raycast->pos->x ;
+	raycast->map->y = (int) raycast->pos->y ;
+	raycast->rayDir->x = raycast->dir->x;
+	raycast->rayDir->y = raycast->dir->y;
+	calc_deltaDist(raycast);
+	calc_step_and_sideDist(raycast);
+	DDA_algo_on_door(cub3d, raycast, AWP);
+	if (AWP)
+		AWP_shot(cub3d);
+	else
+		open_or_close_door(cub3d, raycast);	
 }
