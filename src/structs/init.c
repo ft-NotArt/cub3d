@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 16:55:48 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:25:52 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,9 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 		close_failure(cub3d);
 	}
 	cub3d->screen = mlx_new_image(cub3d->mlx, SCREENWIDTH, SCREENHEIGHT);
-	i = 0 ;
-	while (i < NB_TXTRS)
-	{
+	i = -1 ;
+	while (++i < NB_TXTRS)
 		cub3d->txtrs[i] = get_mlx_img(cub3d, pars, pars->txtr_paths[i]);
-		i++ ;
-	}
 	cub3d->txtrs[i] = NULL ;
 	mlx_resize_image(cub3d->txtrs[FL], 256, 256);
 	mlx_resize_image(cub3d->txtrs[CE], 256, 256);

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 16:07:02 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:42:13 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,11 @@ int	main()
 	mlx_image_to_window(cub3d->mlx, cub3d->screen, 0, 0);
 	mlx_set_instance_depth(cub3d->screen->instances, 0);
 
-	/* That has to be a function ofc */
-	mlx_image_t	*tmp = mlx_new_image(cub3d->mlx, 24, 24);
-	mlx_image_to_window(cub3d->mlx, tmp,
-		((SCREENWIDTH / 2) - 16), ((SCREENHEIGHT / 2) - 16));
-	mlx_set_instance_depth(tmp->instances, 2);
-	uint32_t color = get_rgba(0x00, 0x00, 0x00, false);
-	int	i ;
-	i = 0 ;
-	while (i < 24)
-	{
-		if (i != 11 && i != 12)
-		{
-			mlx_put_pixel(tmp, 11, i, color);
-			mlx_put_pixel(tmp, 12, i, color);
-			mlx_put_pixel(tmp, i, 11, color);
-			mlx_put_pixel(tmp, i, 12, color);
-		}
-		i++ ;
-	}
-	
+	draw_crosshair(cub3d);
 
 
 	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));
-	mlx_set_cursor(cub3d->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR));
+	mlx_set_cursor(cub3d->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR)); //TODO: RM
 	mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_HIDDEN);
 
 	mlx_loop_hook(cub3d->mlx, frame_loop, cub3d);

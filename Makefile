@@ -33,6 +33,7 @@ FILES			=	cub3d														\
 					game/raycasting/raycasting game/raycasting/raycasting_calc	\
 					game/raycasting/raycasting_background						\
 					game/movement game/hooks									\
+					game/animation												\
 \
 					structs/init structs/free									\
 \
