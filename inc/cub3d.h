@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 17:53:27 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:16:01 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		draw_crosshair(t_cub3d *cub3d);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);
+void		raycast_to_door(t_cub3d *cub3d);
 void		draw_background(t_cub3d *cub3d, t_raycast *raycast,
 	mlx_image_t *floor, mlx_image_t *ceilling);
 void		calc_deltaDist(t_raycast *raycast);

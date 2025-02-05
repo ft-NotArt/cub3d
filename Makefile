@@ -32,6 +32,7 @@ FILES			=	cub3d														\
 \
 					game/raycasting/raycasting game/raycasting/raycasting_calc	\
 					game/raycasting/raycasting_background						\
+					game/raycasting/door										\
 					game/movement game/hooks									\
 					game/animation												\
 \

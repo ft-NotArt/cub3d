@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:39:22 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 16:06:52 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:18:27 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	keyboard_hook(mlx_key_data_t keydata, void *param)
 	cub3d = (t_cub3d *) param ;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		close_success(cub3d);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	{
+		raycast_to_door(cub3d);
+	}
 	// TODO: Shoot a bullet w/ AWP (maybe in loop_hook)
 }
 
