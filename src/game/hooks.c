@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:39:22 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 04:43:05 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:50:06 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	frame_loop(void *param)
 	t_cub3d	*cub3d ;
 
 	cub3d = (t_cub3d *) param ;
-
 
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
 		move(cub3d, cub3d->raycast->dir->x, cub3d->raycast->dir->y, MOVE_SPEED);

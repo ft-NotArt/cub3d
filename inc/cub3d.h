@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 06:57:54 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:57:51 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@
 
 /*** TYPEDEF ***/
 
-typedef enum orient
+typedef enum s_txtr_id
 {
 	NO,
 	SO,
 	WE,
-	EA
-}	t_orient ;
+	EA,
+	DO,
+	FL,
+	CE
+}	t_txtr_id ;
 
 typedef struct s_point
 {
@@ -62,16 +65,13 @@ typedef struct s_vector
 	double	y ;
 }	t_vector ;
 
-//TODO: Could modify paths to an array (then use orient enum as index)
+//TODO: Could modify paths to an array (then use txtr_id enum as index)
 typedef	struct	s_parsing
 {
 	char		**map;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
+	char		**txtr_paths;
 	struct s_vector	*pos ;
-	t_orient		dir ;
+	t_txtr_id		dir ;
 }				t_parsing;
 
 typedef struct s_raycasting
@@ -80,15 +80,18 @@ typedef struct s_raycasting
 	struct s_vector	*dir ;
 	struct s_vector	*plane ;
 	struct s_vector	*rayDir ;
-	struct s_point	*map ;
 	struct s_vector	*deltaDist ;
 	struct s_vector	*sideDist ;
-	double			perpWallDist;
+	struct s_vector	*tex ;
+	struct s_vector	*floor ;
+	struct s_point	*map ;
 	struct s_point	*step ;
-	t_orient		side ;
 	int				lineHeight ;
 	int				drawStart ;
 	int				drawEnd ;
+	double			perpWallDist;
+	double			rowDist ;
+	t_txtr_id		side ;
 }	t_raycast;
 
 
@@ -111,6 +114,8 @@ void		rotate(t_cub3d *cub3d, double rot_speed);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);
+void		draw_background(t_cub3d *cub3d, t_raycast *raycast,
+	mlx_image_t *floor, mlx_image_t *ceilling);
 void		calc_deltaDist(t_raycast *raycast);
 void		calc_step_and_sideDist(t_raycast *raycast);
 void		calc_line(t_raycast *raycast);

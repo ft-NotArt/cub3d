@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 07:04:38 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:08:05 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ t_raycast	*raycast_init(t_parsing *pars)
 	dir_and_plane_vector_init(raycast, pars);
 
 	raycast->rayDir = vector_init(0, 0);
-	raycast->map = point_init(0, 0);
 	raycast->deltaDist = vector_init(0, 0);
 	raycast->sideDist = vector_init(0, 0);
+	raycast->floor = vector_init(0, 0);
+	raycast->tex = vector_init(0, 0);
+	raycast->map = point_init(0, 0);
 	raycast->step = point_init(0, 0);
 	return (raycast);
 }
@@ -82,12 +84,10 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 	t_cub3d	*cub3d ;
 
 	cub3d = malloc(sizeof(t_cub3d));
-	cub3d->images = malloc(sizeof(mlx_image_t *) * 4);
-	ft_bzero(cub3d->images, sizeof(mlx_image_t *) * 4);
-
+	cub3d->images = malloc(sizeof(mlx_image_t *) * 8);
+	ft_bzero(cub3d->images, sizeof(mlx_image_t *) * 8);
 	cub3d->map = pars->map ;
 	pars->map = NULL ;
-
 	cub3d->mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "CUB3D", false);
 	if (!cub3d->mlx)
 	{
@@ -95,16 +95,17 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 		free_parsing(pars);
 		close_failure(cub3d);
 	}
-
-
 	cub3d->screen = mlx_new_image(cub3d->mlx, SCREENWIDTH, SCREENHEIGHT);
-
-	cub3d->images[NO] = get_mlx_img(cub3d, pars, pars->no_path);
-	cub3d->images[SO] = get_mlx_img(cub3d, pars, pars->so_path);
-	cub3d->images[WE] = get_mlx_img(cub3d, pars, pars->we_path);
-	cub3d->images[EA] = get_mlx_img(cub3d, pars, pars->ea_path);
-
+	cub3d->images[NO] = get_mlx_img(cub3d, pars, pars->txtr_paths[NO]);
+	cub3d->images[SO] = get_mlx_img(cub3d, pars, pars->txtr_paths[SO]);
+	cub3d->images[WE] = get_mlx_img(cub3d, pars, pars->txtr_paths[WE]);
+	cub3d->images[EA] = get_mlx_img(cub3d, pars, pars->txtr_paths[EA]);
+	cub3d->images[DO] = get_mlx_img(cub3d, pars, pars->txtr_paths[DO]);
+	cub3d->images[FL] = get_mlx_img(cub3d, pars, pars->txtr_paths[FL]);
+	cub3d->images[CE] = get_mlx_img(cub3d, pars, pars->txtr_paths[CE]);
+	cub3d->images[7] = NULL;
+	mlx_resize_image(cub3d->images[FL], 256, 256);
+	mlx_resize_image(cub3d->images[CE], 256, 256);
 	cub3d->raycast = raycast_init(pars);
-
 	return (cub3d);
 }

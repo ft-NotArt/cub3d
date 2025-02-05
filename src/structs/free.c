@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:54:14 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 07:06:30 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:25:59 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ void	free_parsing(t_parsing *parsing)
 		}
 		free(parsing->map);
 	}
-	free(parsing->no_path);
-	free(parsing->so_path);
-	free(parsing->we_path);
-	free(parsing->ea_path);
+	i = 0 ;
+	while (parsing->txtr_paths[i])
+	{
+		free(parsing->txtr_paths[i]);
+		i++ ;
+	}
+	free(parsing->txtr_paths);
 	if (parsing->pos)
 		free(parsing->pos);
 	free(parsing);
@@ -46,6 +49,8 @@ void	free_raycast(t_raycast *raycast)
 	free(raycast->deltaDist);
 	free(raycast->sideDist);
 	free(raycast->step);
+	free(raycast->floor);
+	free(raycast->tex);
 	free(raycast);
 }
 void	free_cub3d(t_cub3d *cub3d)
@@ -59,16 +64,13 @@ void	free_cub3d(t_cub3d *cub3d)
 		i++ ;
 	}
 	free(cub3d->map);
-	if (cub3d->images[NO])
-		mlx_delete_image(cub3d->mlx, cub3d->images[NO]);
-	if (cub3d->images[SO])
-		mlx_delete_image(cub3d->mlx, cub3d->images[SO]);
-	if (cub3d->images[WE])
-		mlx_delete_image(cub3d->mlx, cub3d->images[WE]);
-	if (cub3d->images[EA])
-		mlx_delete_image(cub3d->mlx, cub3d->images[EA]);
-	// if (cub3d->images[DO])
-	// 	mlx_delete_image(cub3d->mlx, cub3d->images[DO]);
+	i = 0 ;
+	while (cub3d->images[i])
+	{
+		if (cub3d->images[i])
+			mlx_delete_image(cub3d->mlx, cub3d->images[i]);
+		i++ ;
+	}
 	free(cub3d->images);
 	free_raycast(cub3d->raycast);
 	free(cub3d);

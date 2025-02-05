@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 05:53:37 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:17:02 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ int	main()
 	pars->map[7] = ft_strdup("11111111");
 	pars->map[8] = NULL ;
 
-	pars->no_path = ft_strdup("textures/soinc.png") ;
-	pars->so_path = ft_strdup("textures/brick.png") ;
-	pars->ea_path = ft_strdup("textures/vroum.png") ;
-	pars->we_path = ft_strdup("textures/TUX.png") ;
+	pars->txtr_paths = malloc(sizeof(char *) * 8);
+
+	pars->txtr_paths[NO] = ft_strdup("textures/soinc.png") ;
+	pars->txtr_paths[SO] = ft_strdup("textures/brick.png") ;
+	pars->txtr_paths[WE] = ft_strdup("textures/vroum.png") ;
+	pars->txtr_paths[EA] = ft_strdup("textures/TUX.png") ;
+	pars->txtr_paths[DO] = ft_strdup("textures/door.png") ;
+	pars->txtr_paths[FL] = ft_strdup("textures/floor.png") ;
+	pars->txtr_paths[CE] = ft_strdup("textures/shitty_ceilling.png") ;
+	pars->txtr_paths[7] = NULL ;
 
 	pars->pos = vector_init(4, 4);
 
