@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 17:25:52 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:53:47 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_raycast	*raycast_init(t_parsing *pars)
 	raycast->tex = vector_init(0, 0);
 	raycast->map = point_init(0, 0);
 	raycast->step = point_init(0, 0);
+	raycast->door = false ;
 	return (raycast);
 }
 

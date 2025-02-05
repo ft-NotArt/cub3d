@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 16:55:53 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:55:43 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,21 @@ static void	draw_line(t_cub3d *cub3d, t_raycast *raycast, int x)
 {
 	mlx_image_t	*img ;
 
-	img = cub3d->txtrs[raycast->side];
 	if(raycast->side == EA || raycast->side == WE)
 		raycast->perpWallDist = (raycast->sideDist->x - raycast->deltaDist->x);
 	else
 		raycast->perpWallDist = (raycast->sideDist->y - raycast->deltaDist->y);
+	img = cub3d->txtrs[raycast->side];
+	if (raycast->door)
+		img = cub3d->txtrs[DO];
 	calc_line(raycast);
 	draw_line_loop(cub3d, raycast, x, img);
 }
 
 static	void	DDA_algo(t_cub3d *cub3d, t_raycast *raycast)
 {
-	while(cub3d->map[raycast->map->y][raycast->map->x] != '1')
+	while(cub3d->map[raycast->map->y][raycast->map->x] != '1'
+		&& cub3d->map[raycast->map->y][raycast->map->x] != 'D')
 	{
 		if(raycast->sideDist->x < raycast->sideDist->y)
 		{
@@ -68,6 +71,9 @@ static	void	DDA_algo(t_cub3d *cub3d, t_raycast *raycast)
 			raycast->side = NO + (raycast->step->y != 1);
 		}
 	}
+	raycast->door = false ;
+	if (cub3d->map[raycast->map->y][raycast->map->x] == 'D')
+		raycast->door = true ;
 }
 
 void	raycasting(t_cub3d *cub3d)

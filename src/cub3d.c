@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 17:42:13 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:44:29 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main()
 
 	pars->map[0] = ft_strdup("11111111");
 	pars->map[1] = ft_strdup("10000001");
-	pars->map[2] = ft_strdup("10000001");
+	pars->map[2] = ft_strdup("1000D001");
 	pars->map[3] = ft_strdup("10000001");
 	pars->map[4] = ft_strdup("10000001");
 	pars->map[5] = ft_strdup("10000001");
@@ -62,7 +62,6 @@ int	main()
 
 
 	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));
-	mlx_set_cursor(cub3d->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR)); //TODO: RM
 	mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_HIDDEN);
 
 	mlx_loop_hook(cub3d->mlx, frame_loop, cub3d);

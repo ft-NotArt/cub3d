@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 17:41:15 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:53:27 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_raycasting
 	double			perpWallDist;
 	double			rowDist ;
 	t_txtr_id		side ;
+	bool			door ;
 }	t_raycast;
 
 
