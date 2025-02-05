@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:54:14 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 12:25:59 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:55:51 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	free_cub3d(t_cub3d *cub3d)
 	}
 	free(cub3d->map);
 	i = 0 ;
-	while (cub3d->images[i])
+	while (cub3d->txtrs[i])
 	{
-		if (cub3d->images[i])
-			mlx_delete_image(cub3d->mlx, cub3d->images[i]);
+		if (cub3d->txtrs[i])
+			mlx_delete_image(cub3d->mlx, cub3d->txtrs[i]);
 		i++ ;
 	}
-	free(cub3d->images);
+	free(cub3d->txtrs);
 	free_raycast(cub3d->raycast);
 	free(cub3d);
 }

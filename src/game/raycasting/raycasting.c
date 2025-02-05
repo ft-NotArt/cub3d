@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 13:57:11 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:55:53 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	draw_line(t_cub3d *cub3d, t_raycast *raycast, int x)
 {
 	mlx_image_t	*img ;
 
-	img = cub3d->images[raycast->side];
+	img = cub3d->txtrs[raycast->side];
 	if(raycast->side == EA || raycast->side == WE)
 		raycast->perpWallDist = (raycast->sideDist->x - raycast->deltaDist->x);
 	else
@@ -77,7 +77,7 @@ void	raycasting(t_cub3d *cub3d)
 	int			x ;
 
 	raycast = cub3d->raycast ;
-	draw_background(cub3d, raycast, cub3d->images[FL], cub3d->images[CE]);
+	draw_background(cub3d, raycast, cub3d->txtrs[FL], cub3d->txtrs[CE]);
 	x = 0 ;
 	while (x < SCREENWIDTH)
 	{

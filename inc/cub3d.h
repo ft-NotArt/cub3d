@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 15:20:01 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:52:11 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 # define MOVE_SPEED 0.15
 # define ROT_SPEED 0.05
+
+# define NB_TXTRS 7
 
 /*** TYPEDEF ***/
 
@@ -100,7 +102,7 @@ typedef struct s_cub3d
 	char				**map ;
 	mlx_t				*mlx ;
 	mlx_image_t			*screen ;
-	mlx_image_t			**images ;
+	mlx_image_t			**txtrs ;
 	struct s_raycasting	*raycast ;
 }	t_cub3d ;
 
