@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:10:04 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 05:49:56 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:53:12 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	move(t_cub3d *cub3d, double dir1, double dir2, double move_speed)
 	t_vector	*pos ;
 
 	pos = cub3d->raycast->pos ;
-	if (cub3d->map[(int) pos->y][(int) (pos->x + dir1 * move_speed)] == '0')
+	if (cub3d->map[(int) pos->y][(int) (pos->x + dir1 * move_speed)] == '0'
+		|| cub3d->map[(int) pos->y][(int) (pos->x + dir1 * move_speed)] == 'd')
 		pos->x += dir1 * move_speed;
-	if (cub3d->map[(int) (pos->y + dir2 * move_speed)][(int) pos->x] == '0')
+	if (cub3d->map[(int) (pos->y + dir2 * move_speed)][(int) pos->x] == '0'
+		|| cub3d->map[(int) (pos->y + dir2 * move_speed)][(int) pos->x] == 'd')
 		pos->y += dir2 * move_speed;
 }
 
