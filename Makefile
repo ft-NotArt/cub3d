@@ -21,12 +21,21 @@ LIBMLX 			=	$(MLX)/build/libmlx42.a
 MAKEFLAGS		+=	-s
 CFLAGS			=	-Wall -Werror -Wextra -g -pthread							\
 					-Iinc -Ilibft -Ilibft/gnl -IMLX42/include					\
+					-D SCREENWIDTH=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f1) \
+					-D SCREENHEIGHT=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f2) \
 
 LFLAGS			=	-ldl -lglfw -lm												\
 
 # FILES
 
 FILES			=	cub3d														\
+\
+					game/raycasting game/raycasting_calc						\
+					game/movement game/hooks									\
+\
+					structs/init structs/free									\
+\
+					utils/utils utils/exit										\
 \
 
 SRC				=	$(addprefix src/, $(addsuffix .c, $(FILES)))
