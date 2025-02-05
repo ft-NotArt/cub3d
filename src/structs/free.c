@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:54:14 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 16:55:51 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:38:42 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,21 @@ void	free_parsing(t_parsing *parsing)
 
 	if (parsing->map)
 	{
-		i = 0 ;
-		while (parsing->map[i])
-		{
+		i = -1 ;
+		while (parsing->map[++i])
 			free(parsing->map[i]);
-			i++ ;
-		}
 		free(parsing->map);
 	}
-	i = 0 ;
-	while (parsing->txtr_paths[i])
-	{
-		free(parsing->txtr_paths[i]);
-		i++ ;
-	}
+	i = -1 ;
+	while (++i < NB_TXTRS)
+		if (parsing->txtr_paths[i])
+			free(parsing->txtr_paths[i]);
 	free(parsing->txtr_paths);
 	if (parsing->pos)
 		free(parsing->pos);
 	free(parsing);
 }
 
-// TODO: Add everything
 void	free_raycast(t_raycast *raycast)
 {
 	free(raycast->pos);
@@ -57,21 +51,22 @@ void	free_cub3d(t_cub3d *cub3d)
 {
 	int	i ;
 
-	i = 0 ;
-	while (cub3d->map[i])
+	i = -1 ;
+	while (cub3d->map[++i])
 	{
 		free(cub3d->map[i]);
-		i++ ;
 	}
 	free(cub3d->map);
-	i = 0 ;
-	while (cub3d->txtrs[i])
-	{
+	i = -1 ;
+	while (++i < NB_TXTRS)
 		if (cub3d->txtrs[i])
 			mlx_delete_image(cub3d->mlx, cub3d->txtrs[i]);
-		i++ ;
-	}
 	free(cub3d->txtrs);
+	i = -1 ;
+	while (++i < NB_FRAMES)
+		if (cub3d->frames[i])
+			mlx_delete_image(cub3d->mlx, cub3d->frames[i]);
+	free(cub3d->frames);
 	free_raycast(cub3d->raycast);
 	free(cub3d);
 }

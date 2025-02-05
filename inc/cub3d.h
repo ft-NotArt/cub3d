@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 20:18:19 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:25:03 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ROT_SPEED 0.05
 
 # define NB_TXTRS 7
+# define NB_FRAMES 18
 
 /*** TYPEDEF ***/
 
@@ -104,6 +105,8 @@ typedef struct s_cub3d
 	mlx_t				*mlx ;
 	mlx_image_t			*screen ;
 	mlx_image_t			**txtrs ;
+	mlx_image_t			**frames ;
+	int					frame ;
 	struct s_raycasting	*raycast ;
 }	t_cub3d ;
 
@@ -119,6 +122,7 @@ void		rotate(t_cub3d *cub3d, double rot_speed);
 
 // Display
 void		draw_crosshair(t_cub3d *cub3d);
+void		put_AWP_anim_to_window(t_cub3d *cub3d);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);
@@ -132,6 +136,8 @@ int			calc_texX(t_raycast *raycast, mlx_image_t *img);
 
 // Init
 t_cub3d		*cub3d_init(t_parsing *pars);
+t_raycast	*raycast_init(t_parsing *pars);
+t_point		*point_init(int x, int y);
 t_vector	*vector_init(double x, double y);
 
 // Utils

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 20:18:06 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:05:08 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main()
 	mlx_set_instance_depth(cub3d->screen->instances, 0);
 
 	draw_crosshair(cub3d);
+	put_AWP_anim_to_window(cub3d);
 
 
 	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));

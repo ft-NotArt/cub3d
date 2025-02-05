@@ -36,7 +36,7 @@ FILES			=	cub3d														\
 					game/movement game/hooks									\
 					game/animation												\
 \
-					structs/init structs/free									\
+					structs/init structs/init2 structs/free						\
 \
 					utils/utils utils/exit										\
 \
