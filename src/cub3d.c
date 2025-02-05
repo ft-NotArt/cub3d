@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 17:44:29 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:02:13 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main()
 
 	pars->map[0] = ft_strdup("11111111");
 	pars->map[1] = ft_strdup("10000001");
-	pars->map[2] = ft_strdup("1000D001");
+	pars->map[2] = ft_strdup("1000DD01");
 	pars->map[3] = ft_strdup("10000001");
 	pars->map[4] = ft_strdup("10000001");
 	pars->map[5] = ft_strdup("10000001");

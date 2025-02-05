@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:08:07 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 18:17:24 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:01:13 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
 {
-	while(cub3d->map[raycast->map->y][raycast->map->x] != '1'
-		&& cub3d->map[raycast->map->y][raycast->map->x] != 'D'
-		&& cub3d->map[raycast->map->y][raycast->map->x] != 'd')
+	bool	hit ;
+
+	hit = false ;
+	while (!hit)
 	{
 		if(raycast->sideDist->x < raycast->sideDist->y)
 		{
@@ -30,6 +31,10 @@ static void	DDA_algo_on_door(t_cub3d *cub3d, t_raycast *raycast)
 			raycast->map->y += raycast->step->y;
 			raycast->side = NO + (raycast->step->y != 1);
 		}
+		if (cub3d->map[raycast->map->y][raycast->map->x] == '1'
+			|| cub3d->map[raycast->map->y][raycast->map->x] == 'D'
+			|| cub3d->map[raycast->map->y][raycast->map->x] == 'd')
+			hit = true ;
 	}
 	raycast->door = true ;
 	if (cub3d->map[raycast->map->y][raycast->map->x] == '1')
