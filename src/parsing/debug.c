@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:35:23 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 11:04:50 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/06 00:55:05 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	print_map(char **map)
 
 void	print_paths(t_parsing *parsing)
 {
-	printf("%s\n", parsing->paths[NO]);
-	printf("%s\n", parsing->paths[SO]);
-	printf("%s\n", parsing->paths[WE]);
-	printf("%s\n", parsing->paths[EA]);
-	printf("%s\n", parsing->paths[DO]);
-	printf("%s\n", parsing->paths[FL]);
-	printf("%s\n", parsing->paths[CE]);
+	int i = 0;
+	while (parsing->paths[i])
+	{
+		printf("%s\n", parsing->paths[i]);
+		i++;
+	}
+
 }

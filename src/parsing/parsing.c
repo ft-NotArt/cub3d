@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 20:46:46 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/06 01:29:32 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,25 @@ t_parsing	*init_parsing(char *filename)
 	parsing = malloc(sizeof(t_parsing));
 	if (!parsing)
 		return (NULL);
-	parsing->paths = malloc(8 * sizeof(char *));
+	parsing->paths = malloc(sizeof(char *) * 8);
+	ft_bzero(parsing->paths, 8 * sizeof(char *));
+	parsing->map_height = 0;
 	parsing->map = NULL;
 	return (parsing);
+}
+
+bool	check_paths(t_parsing *parsing)
+{
+	int i = 0;
+	while (parsing->paths[i])
+	{
+		if (!parsing->paths[i])
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
 }
 
 int main(int ac, char **av)
@@ -34,6 +50,8 @@ int main(int ac, char **av)
 	parsing = init_parsing(av[1]);
 	(void) parsing;
 	parsing->map = get_map_data(av[1], parsing);
-	print_paths(parsing);
+	create_floodfill_map(parsing);
+	// print_map(parsing->map);
+	// print_paths(parsing);
 	free_parsing(parsing);
 }
