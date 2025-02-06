@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 01:29:32 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/06 02:21:20 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_parsing	*init_parsing(char *filename)
 	parsing->paths = malloc(sizeof(char *) * 8);
 	ft_bzero(parsing->paths, 8 * sizeof(char *));
 	parsing->map_height = 0;
+	parsing->player_x = 0;
+	parsing->player_y = 0;
 	parsing->map = NULL;
 	return (parsing);
 }
@@ -50,8 +52,6 @@ int main(int ac, char **av)
 	parsing = init_parsing(av[1]);
 	(void) parsing;
 	parsing->map = get_map_data(av[1], parsing);
-	create_floodfill_map(parsing);
-	// print_map(parsing->map);
-	// print_paths(parsing);
+	is_playable_map(parsing);
 	free_parsing(parsing);
 }

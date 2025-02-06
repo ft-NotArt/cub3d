@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 01:57:13 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/06 02:54:22 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,42 @@ int	get_higher_len(t_parsing *parsing)
 	return (len);
 }
 
+// TODO add padding on sides of the map
+void	flood_fill(char **map, int x, int y)
+{
+	printf("%c", map[x][y]);
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return ;
+	if (map[x][y] == ' ' || map[x][y] == '\n')
+	{
+		printf("Map is not closed\n");
+		exit(1);
+	}
+	map[x][y] = 'V';
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x, y - 1);
+	flood_fill(map, x, y + 1);
+}
+
+
+bool	is_playable_map(t_parsing *parsing)
+{
+	char	**flood_map;
+
+	flood_map = create_floodfill_map(parsing);
+	// print_map(flood_map);
+	get_player_pos(parsing);
+	// printf("y -> %d\n", parsing->player_y);
+	// printf("x -> %d\n", parsing->player_x);
+	// printf("%s\n", flood_map[parsing->player_x - 1]);
+	// printf("%c\n", flood_map[parsing->player_x - 1][parsing->player_y - 1]);
+	// printf("%c\n", flood_map[1][5]);
+	flood_fill(flood_map, parsing->player_x - 1, parsing->player_y - 1);
+	return (true);
+}
+
+
 char	**create_floodfill_map(t_parsing *parsing)
 {
 	char	**map;
@@ -156,7 +192,7 @@ char	**create_floodfill_map(t_parsing *parsing)
 	{
 		int j = 0;
 		map[i] = malloc(sizeof(char *) * (get_higher_len(parsing) + 1));
-		ft_strlcpy(map[i], parsing->map[i], ft_strlen(parsing->map[i]));
+		ft_strlcpy(map[i], parsing->map[i], ft_strlen(parsing->map[i]) + 1);
 		while (map[i][j])
 			j++;
 		while (j < get_higher_len(parsing))
@@ -164,12 +200,34 @@ char	**create_floodfill_map(t_parsing *parsing)
 			map[i][j] = ' ';
 			j++;
 		}
-		printf("%s\n", map[i]);
 		i++;
 	}
+	map[i] = NULL;
 	return (map);
 }
 
+void	get_player_pos(t_parsing *parsing)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (parsing->map[i])
+	{
+		j = 0;
+		while (parsing->map[i][j])
+		{
+			if ((parsing->map[i][j] != 'N' || parsing->map[i][j] != 'S'
+				|| parsing->map[i][j] != 'W' || parsing->map[i][j] != 'E'))
+			{
+				parsing->player_x = i;
+				parsing->player_y = j;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 char	**get_map_data(char *filename, t_parsing *parsing)
 {
