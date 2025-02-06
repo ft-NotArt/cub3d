@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 02:54:22 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:02:42 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,22 +146,48 @@ int	get_higher_len(t_parsing *parsing)
 }
 
 // TODO add padding on sides of the map
-void	flood_fill(char **map, int x, int y)
+void	flood_fill(char **map, int x, int y, int height)
 {
-	printf("%c", map[x][y]);
-	if (map[x][y] == '1' || map[x][y] == 'V')
-		return ;
+	// printf("%c\n", map[x][y]);
+	// printf("%d\n", x);
+	// printf("%d\n", y);
+	// if (x == -1)
+	// 	printf("x == -1\n");
+	// if (y == -1)
+	// 	printf("y == -1\n");
+	if ((x == -1 || y == -1) || (x == (height - 1) && map[x][y] == '0'))
+	{
+		// printf("%c\n", map[x][y]);
+		// printf("%s\n", map[x]);
+		printf("Map is not closed\n");
+		exit(1);
+	}
 	if (map[x][y] == ' ' || map[x][y] == '\n')
 	{
 		printf("Map is not closed\n");
 		exit(1);
 	}
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return ;
 	map[x][y] = 'V';
-	flood_fill(map, x - 1, y);
-	flood_fill(map, x + 1, y);
-	flood_fill(map, x, y - 1);
-	flood_fill(map, x, y + 1);
+	flood_fill(map, x - 1, y, height);
+	flood_fill(map, x + 1, y, height);
+	flood_fill(map, x, y - 1, height);
+	flood_fill(map, x, y + 1, height);
 }
+
+int	flood_map_height(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
 
 
 bool	is_playable_map(t_parsing *parsing)
@@ -170,13 +196,13 @@ bool	is_playable_map(t_parsing *parsing)
 
 	flood_map = create_floodfill_map(parsing);
 	// print_map(flood_map);
-	get_player_pos(parsing);
+	get_player_pos(flood_map, parsing);
 	// printf("y -> %d\n", parsing->player_y);
 	// printf("x -> %d\n", parsing->player_x);
 	// printf("%s\n", flood_map[parsing->player_x - 1]);
 	// printf("%c\n", flood_map[parsing->player_x - 1][parsing->player_y - 1]);
 	// printf("%c\n", flood_map[1][5]);
-	flood_fill(flood_map, parsing->player_x - 1, parsing->player_y - 1);
+	flood_fill(flood_map, parsing->player_x, parsing->player_y, flood_map_height(flood_map));
 	return (true);
 }
 
@@ -185,13 +211,14 @@ char	**create_floodfill_map(t_parsing *parsing)
 {
 	char	**map;
 	int 	i;
+	int 	j;
 
 	map = malloc(sizeof(char **) * (parsing->map_height + 1));
 	i = 0;
 	while (parsing->map[i])
 	{
-		int j = 0;
-		map[i] = malloc(sizeof(char *) * (get_higher_len(parsing) + 1));
+		j = 0;
+		map[i] = malloc(sizeof(char *) * (get_higher_len(parsing) + 2));
 		ft_strlcpy(map[i], parsing->map[i], ft_strlen(parsing->map[i]) + 1);
 		while (map[i][j])
 			j++;
@@ -200,26 +227,32 @@ char	**create_floodfill_map(t_parsing *parsing)
 			map[i][j] = ' ';
 			j++;
 		}
+		map[i][j] = '\n';
+		map[i][j + 1] = '\0';
 		i++;
 	}
 	map[i] = NULL;
 	return (map);
 }
 
-void	get_player_pos(t_parsing *parsing)
+void	get_player_pos(char **map, t_parsing *parsing)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (parsing->map[i])
+	while (map[i])
 	{
 		j = 0;
-		while (parsing->map[i][j])
+		printf("%d ", i);
+		printf("%s\n", map[i]);
+		while (map[i][j])
 		{
-			if ((parsing->map[i][j] != 'N' || parsing->map[i][j] != 'S'
-				|| parsing->map[i][j] != 'W' || parsing->map[i][j] != 'E'))
+			if ((map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E'))
 			{
+				printf("je remplis i ->%d\n", i);
+				printf("je remplis j ->%d\n", j);
 				parsing->player_x = i;
 				parsing->player_y = j;
 			}
