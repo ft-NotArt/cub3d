@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 17:06:52 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/07 03:32:00 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ int main(int ac, char **av)
 	parsing = init_parsing(av[1]);
 	(void) parsing;
 	parsing->map = get_map_data(av[1], parsing);
-	print_paths(parsing);
-	if (!check_paths(parsing))
-	{
-		ft_printf_fd(2, "Paths are missing !\n");
-		exit(1);
-	}
-	is_playable_map(parsing);
+	// print_map(parsing->map);
+	// print_paths(parsing);
+	// if (!check_paths(parsing))
+	// {
+	// 	ft_printf_fd(2, "Paths are missing !\n");
+	// 	exit(1);
+	// }
+	// is_playable_map(parsing);
 	free_parsing(parsing);
 }

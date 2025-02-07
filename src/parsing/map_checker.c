@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 17:26:37 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/07 03:46:55 by kaveo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,35 @@ void	get_player_pos(char **map, t_parsing *parsing)
 		i++;
 	}
 }
+static int	handle_open(char *filename)
+{
+	int	fd;
 
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		perror(filename);
+		return (-1);
+	}
+	return (fd);
+}
+
+static char	*handle_map(char *map_in_line, char *line)
+{
+	char	*temp;
+
+	if (line[0] == '\n' || !is_map_charset(line))
+	{
+		ft_printf_fd(2, "Error\nInvalid characters in the map !\n");
+		exit(1);
+	}
+	temp = ft_strjoin(map_in_line, line);
+	map_in_line = temp;
+	return (map_in_line);
+}
+
+
+// TODO make this functions shorted and the rest of the parsing greater
 char	**get_map_data(char *filename, t_parsing *parsing)
 {
 	int		fd;
@@ -256,49 +284,34 @@ char	**get_map_data(char *filename, t_parsing *parsing)
 	char	*line;
 	char	*map_in_line;
 	char	*temp;
+	char	**id = malloc(sizeof(char **) * (PATHS_COUNT + 1));
+	int i = 0;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (perror(filename), NULL);
+	fd = handle_open(filename);
 	line = get_next_line(fd);
-	if (!line)
-	{
-		ft_printf_fd(2, "Error\nMap is empty !\n");
-		free_parsing(parsing);
-		exit(1);
-	}
 	map_in_line = ft_strdup("");
 	while (line)
 	{
 		if (is_map_identifier(line))
-		{
-			if (!get_path_by_id(get_identifier_id(line), parsing, line))
-			{
-				free(map_in_line);
-				free_parsing(parsing);
-				free(line);
-				exit(1);
-			}
-		}
+			id[i++] = ft_strdup(line);
 		else if (is_map_charset(line))
 		{
 			while (line)
 			{
-				printf("%s", line);
-				temp = ft_strjoin(map_in_line, line);
-				map_in_line = temp;
-				if (line[0] == '\n' || !is_map_charset(line))
-				{
-					ft_printf_fd(2, "Error\nInvalid characters in the map !\n");
-					exit(1);
-				}
+				temp = map_in_line;
+				map_in_line = handle_map(map_in_line, line);
+				free(temp);
 				parsing->map_height++;
 				free(line);
 				line = get_next_line(fd);
 			}
 		}
+		free(line);
 		line = get_next_line(fd);
 	}
+	id[i] = NULL;
 	map = ft_split(map_in_line, '\n');
+	free(map_in_line);
+	free_str_array(id);
 	return (map);
 }
