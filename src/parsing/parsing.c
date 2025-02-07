@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/07 03:32:00 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/07 18:32:25 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_parsing	*init_parsing(char *filename)
-{
-	t_parsing	*parsing;
-
-	(void) filename;
-	parsing = malloc(sizeof(t_parsing));
-	if (!parsing)
-		return (NULL);
-	parsing->paths = malloc(sizeof(char *) * 8);
-	ft_bzero(parsing->paths, 8 * sizeof(char *));
-	parsing->map_height = 0;
-	parsing->player_x = 0;
-	parsing->player_y = 0;
-	parsing->map = NULL;
-	return (parsing);
-}
 
 bool	check_paths(t_parsing *parsing)
 {
@@ -50,9 +33,12 @@ int main(int ac, char **av)
 	if (!args_checker(ac, av))
 		exit(1);
 	parsing = init_parsing(av[1]);
-	(void) parsing;
-	parsing->map = get_map_data(av[1], parsing);
 	// print_map(parsing->map);
+	printf("%d\n", parsing->player_dir);
+	printf("%d\n", parsing->player_x);
+	printf("%d\n", parsing->player_y);
+	printf("%c\n", parsing->map[11][26]);
+	// printf("%d\n", parsing->map_height);
 	// print_paths(parsing);
 	// if (!check_paths(parsing))
 	// {

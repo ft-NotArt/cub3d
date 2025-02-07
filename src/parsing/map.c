@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 18:35:23 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/07 18:29:24 by albillie         ###   ########.fr       */
+/*   Created: 2025/02/07 17:19:30 by albillie          #+#    #+#             */
+/*   Updated: 2025/02/07 18:24:22 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_map(char **map)
+size_t	get_map_height(char **map)
 {
-	int	i;
+	int	y;
 
-	i = 0;
-	while (map[i])
+	y = 0;
+	while (map[y])
 	{
-		printf("%s\n", map[i]);
-		i++;
+		y++;
 	}
-}
-
-void	print_paths(t_parsing *parsing)
-{
-	int	i;
-
-	i = 0;
-	while (parsing->paths[i])
-	{
-		printf("%s\n", parsing->paths[i]);
-		i++;
-	}
+	return (y);
 }

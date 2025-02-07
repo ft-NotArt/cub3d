@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:30:05 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:31:24 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,13 +178,20 @@ typedef	struct	s_parsing
 	char		**map;
 	char		**paths;
 	int			map_height;
+	char		player_dir;
 	int			player_x;
 	int			player_y;
 }				t_parsing;
 
+// Player
+
+size_t	get_player_x_pos(char **map);
+size_t	get_player_y_pos(char **map);
+
+
 bool		args_checker(int ac, char **av);
 void		print_map(char **map);
-char		**get_map_data(char *filename, t_parsing *parsing);
+char		**get_map_data(char *filename);
 bool		is_map_charset(char *line);
 bool		is_map_identifier(char *line);
 void		print_paths(t_parsing *parsing);
@@ -194,6 +201,9 @@ char		**create_floodfill_map(t_parsing *parsing);
 void		get_player_pos(char **map, t_parsing *parsing);
 bool		is_playable_map(t_parsing *parsing);
 bool		check_paths(t_parsing *parsing);
+size_t		get_map_height(char **map);
+t_parsing	*init_parsing(char *filename);
+size_t		get_player_direction(char **map);
 
 
 #endif

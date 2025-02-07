@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaveo <kaveo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/07 03:46:55 by kaveo            ###   ########.fr       */
+/*   Updated: 2025/02/07 18:25:01 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ bool	is_playable_map(t_parsing *parsing)
 	char	**flood_map;
 
 	flood_map = create_floodfill_map(parsing);
-	get_player_pos(flood_map, parsing);
 	flood_fill(flood_map, parsing->player_x, parsing->player_y, flood_map_height(flood_map));
 	return (true);
 }
@@ -225,29 +224,6 @@ char	**create_floodfill_map(t_parsing *parsing)
 	map[i] = NULL;
 	return (map);
 }
-
-void	get_player_pos(char **map, t_parsing *parsing)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if ((map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'W' || map[i][j] == 'E'))
-			{
-				parsing->player_x = i;
-				parsing->player_y = j;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 static int	handle_open(char *filename)
 {
 	int	fd;
@@ -275,16 +251,15 @@ static char	*handle_map(char *map_in_line, char *line)
 	return (map_in_line);
 }
 
-
-// TODO make this functions shorted and the rest of the parsing greater
-char	**get_map_data(char *filename, t_parsing *parsing)
+char	**get_map_data(char *filename)
 {
+	char	**map;
+	char	**id;
 	int		fd;
-	char	**map = NULL;
 	char	*line;
 	char	*map_in_line;
 	char	*temp;
-	char	**id = malloc(sizeof(char **) * (PATHS_COUNT + 1));
+	id = malloc(sizeof(char **) * (PATHS_COUNT + 1));
 	int i = 0;
 
 	fd = handle_open(filename);
@@ -301,7 +276,6 @@ char	**get_map_data(char *filename, t_parsing *parsing)
 				temp = map_in_line;
 				map_in_line = handle_map(map_in_line, line);
 				free(temp);
-				parsing->map_height++;
 				free(line);
 				line = get_next_line(fd);
 			}
