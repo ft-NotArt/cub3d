@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:45:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/05 23:18:27 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/07 01:30:40 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ bool	is_map_charset(char *line)
 
 bool	is_map_identifier(char *line)
 {
-	if (ft_strnstr(line, "NO", ft_strlen(line)) || ft_strnstr(line, "SO", ft_strlen(line))
-		|| ft_strnstr(line, "WE", ft_strlen(line)) || ft_strnstr(line, "EA", ft_strlen(line))
-		|| ft_strnstr(line, "F", ft_strlen(line)) || ft_strnstr(line, "C", ft_strlen(line))
-		|| ft_strnstr(line, "DO", ft_strlen(line)))
+	int	len;
+
+	len = ft_strlen(line);
+	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len)
+		|| ft_strnstr(line, "WE", len) || ft_strnstr(line, "EA", len)
+		|| ft_strnstr(line, "F", len) || ft_strnstr(line, "C", len)
+		|| ft_strnstr(line, "DO", len))
 	{
 		return (true);
 	}

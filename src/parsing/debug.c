@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:35:23 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 14:52:29 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/07 01:32:09 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	print_map(char **map)
 
 void	print_paths(t_parsing *parsing)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (parsing->paths[i])
 	{
 		printf("%s\n", parsing->paths[i]);
 		i++;
 	}
-
 }

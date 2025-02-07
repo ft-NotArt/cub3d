@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/06 15:02:42 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:26:37 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 static bool	count_path_words(char *line)
 {
-	int	count;
 	int	i;
+	int	count;
 
-	count = 0;
 	i = 0;
+	count = 0;
 	while (line[i])
 	{
 		while (ft_isspace(line[i]))
+		{
 			i++;
+		}
 		if (line[i])
+		{
 			count++;
+		}
 		while (line[i] && !ft_isspace(line[i]))
+		{
 			i++;
+		}
 	}
 	if (count != 2)
 		return (false);
@@ -41,9 +47,13 @@ static int	get_path_len(char *temp)
 	i = 0;
 	len = 0;
 	while (!ft_isspace(temp[i]))
+	{
 		i++;
+	}
 	while (ft_isspace(temp[i]))
+	{
 		i++;
+	}
 	while (!ft_isspace(temp[i]))
 	{
 		i++;
@@ -145,20 +155,10 @@ int	get_higher_len(t_parsing *parsing)
 	return (len);
 }
 
-// TODO add padding on sides of the map
 void	flood_fill(char **map, int x, int y, int height)
 {
-	// printf("%c\n", map[x][y]);
-	// printf("%d\n", x);
-	// printf("%d\n", y);
-	// if (x == -1)
-	// 	printf("x == -1\n");
-	// if (y == -1)
-	// 	printf("y == -1\n");
 	if ((x == -1 || y == -1) || (x == (height - 1) && map[x][y] == '0'))
 	{
-		// printf("%c\n", map[x][y]);
-		// printf("%s\n", map[x]);
 		printf("Map is not closed\n");
 		exit(1);
 	}
@@ -188,24 +188,15 @@ int	flood_map_height(char **map)
 	return (i);
 }
 
-
-
 bool	is_playable_map(t_parsing *parsing)
 {
 	char	**flood_map;
 
 	flood_map = create_floodfill_map(parsing);
-	// print_map(flood_map);
 	get_player_pos(flood_map, parsing);
-	// printf("y -> %d\n", parsing->player_y);
-	// printf("x -> %d\n", parsing->player_x);
-	// printf("%s\n", flood_map[parsing->player_x - 1]);
-	// printf("%c\n", flood_map[parsing->player_x - 1][parsing->player_y - 1]);
-	// printf("%c\n", flood_map[1][5]);
 	flood_fill(flood_map, parsing->player_x, parsing->player_y, flood_map_height(flood_map));
 	return (true);
 }
-
 
 char	**create_floodfill_map(t_parsing *parsing)
 {
@@ -244,15 +235,11 @@ void	get_player_pos(char **map, t_parsing *parsing)
 	while (map[i])
 	{
 		j = 0;
-		printf("%d ", i);
-		printf("%s\n", map[i]);
 		while (map[i][j])
 		{
 			if ((map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E'))
 			{
-				printf("je remplis i ->%d\n", i);
-				printf("je remplis j ->%d\n", j);
 				parsing->player_x = i;
 				parsing->player_y = j;
 			}
@@ -295,13 +282,14 @@ char	**get_map_data(char *filename, t_parsing *parsing)
 		}
 		else if (is_map_charset(line))
 		{
-			while (line && is_map_charset(line))
+			while (line)
 			{
+				printf("%s", line);
 				temp = ft_strjoin(map_in_line, line);
 				map_in_line = temp;
 				if (line[0] == '\n' || !is_map_charset(line))
 				{
-					ft_printf_fd(2, "Error\nInvalid characters inside the map !\n");
+					ft_printf_fd(2, "Error\nInvalid characters in the map !\n");
 					exit(1);
 				}
 				parsing->map_height++;
