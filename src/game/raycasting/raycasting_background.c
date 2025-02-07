@@ -6,13 +6,11 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:22:59 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/07 21:08:08 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/07 21:12:52 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//TODO : missing draw on 1 pixel on left side of screen (only on background)
 
 static void	draw_pixel_background(t_cub3d *cub3d, mlx_image_t *img,
 	int x_pos, int y_pos)
@@ -41,7 +39,7 @@ void	draw_background(t_cub3d *cub3d, t_raycast *raycast,
 	int			y ;
 	int			x ;
 
-	y = (SCREENHEIGHT / 2) + 1 ;
+	y = (SCREENHEIGHT / 2) ;
 	while (++y < SCREENHEIGHT)
 	{
 		raycast->rayDir->x = raycast->dir->x - raycast->plane->x ;
@@ -51,7 +49,7 @@ void	draw_background(t_cub3d *cub3d, t_raycast *raycast,
 			+ raycast->rowDist * raycast->rayDir->x ;
 		raycast->floor->y = raycast->pos->y
 			+ raycast->rowDist * raycast->rayDir->y ;
-		x = 0 ;
+		x = -1 ;
 		while (++x < SCREENWIDTH)
 		{
 			draw_pixel_background(cub3d, floor, x, y);
