@@ -6,11 +6,13 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:22:59 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 14:43:55 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/07 21:08:08 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//TODO : missing draw on 1 pixel on left side of screen (only on background)
 
 static void	draw_pixel_background(t_cub3d *cub3d, mlx_image_t *img,
 	int x_pos, int y_pos)

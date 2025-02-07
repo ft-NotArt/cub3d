@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:36:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 05:10:01 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:37:11 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_mlx(void)
 
 /**
  * @note The alpha is always at maximum,
- * as in the context of cub3d we don't have to deal w/ transparancy
+ * as in the context of cub3d we don't have to deal w/ transparency
  * @param shadow wether or not to apply a darker tone on the color
  */
 uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b, bool shadow)

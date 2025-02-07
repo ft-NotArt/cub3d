@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 23:21:53 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/07 21:08:29 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	put_AWP_anim_to_window(t_cub3d *cub3d)
 	while (cub3d->frames[++i])
 	{
 		mlx_image_to_window(cub3d->mlx, cub3d->frames[i],
-			(SCREENWIDTH / 2) - (cub3d->frames[i]->width / 2),
-			SCREENHEIGHT - cub3d->frames[i]->height);
+			SCREENWIDTH * (1.0 / 4.0),
+			SCREENHEIGHT * (1.0 / 3.0));
 		mlx_set_instance_depth(cub3d->frames[i]->instances, 4);
 		cub3d->frames[i]->enabled = false ;
 	}
