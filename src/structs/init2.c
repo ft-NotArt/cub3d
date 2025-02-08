@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:25:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/07 21:08:18 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:26:23 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 	if (!cub3d->mlx)
 		(error_mlx(), free_parsing(pars), close_failure(cub3d));
 	cub3d->screen = mlx_new_image(cub3d->mlx, SCREENWIDTH, SCREENHEIGHT);
+	mlx_image_to_window(cub3d->mlx, cub3d->screen, 0, 0);
+	mlx_set_instance_depth(cub3d->screen->instances, 0);
 	cub3d_init_img(cub3d, pars);
 	cub3d->frame = -1 ;
 	return (cub3d);
