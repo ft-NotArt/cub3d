@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:20:08 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:21:22 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 # define RED 0xFF0000FF
 # define GREEN 0x00FF00FF
 # define BLUE 0x0000FFFF
+
+# define SPACES_SET " \t\r\v\f"
 
 /*** TYPEDEF ***/
 
