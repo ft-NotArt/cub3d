@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:57:03 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 04:40:10 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:12:43 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	get_path_len(char *temp)
+static size_t	get_path_len(char *temp)
 {
 	int	i;
 	int	len;
@@ -35,7 +35,7 @@ size_t	get_path_len(char *temp)
 	return (len);
 }
 
-bool	count_path_words(char *line)
+static bool	count_path_words(char *line)
 {
 	int	i;
 	int	count;
@@ -64,24 +64,27 @@ bool	count_path_words(char *line)
 	return (true);
 }
 
-bool	check_path_order(char *line, t_txtr_id id)
+static char	*get_texture_path(char *line)
 {
-	char	*tmp;
+	char	*path;
+	char	*temp;
+	int		i;
+	int		j;
 
-	tmp = ft_strtrim(line, SPACES_SET);
-	if ((id == NO && (tmp[0] != 'N' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
-		|| (id == SO && (tmp[0] != 'S' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
-		|| (id == WE && (tmp[0] != 'W' || tmp[1] != 'E' || !ft_isspace(tmp[2])))
-		|| (id == EA && (tmp[0] != 'E' || tmp[1] != 'A' || !ft_isspace(tmp[2])))
-		|| (id == DO && (tmp[0] != 'D' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
-		|| (id == FL && (tmp[0] != 'F' || !ft_isspace(tmp[1])))
-		|| (id == CE && (tmp[0] != 'C' || !ft_isspace(tmp[1]))))
+	i = 2;
+	temp = ft_strtrim(line, SPACES_SET);
+	path = malloc(sizeof(char *) + (get_path_len(temp)));
+	while (temp[i] && ft_isspace(temp[i]))
+		i++;
+	j = 0;
+	while (temp[i] && !ft_isspace(temp[i]))
 	{
-		return (free(tmp), false);
+		path[j++] = temp[i++];
 	}
-	return (free(tmp), true);
+	path[j] = '\0';
+	free(temp);
+	return (path);
 }
-
 
 bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line)
 {
@@ -130,39 +133,3 @@ int	get_path_id(char *line)
 	return (-1);
 }
 
-bool	check_paths_count(t_parsing *parsing)
-{
-	int	i;
-
-	i = 0;
-	while (i < PATHS_COUNT)
-	{
-		if (!parsing->paths[i])
-		{
-			ft_printf_fd(2, "Error\nPath(s) are missing !\n");
-			return (false);
-		}
-		i++;
-	}
-	return (true);
-}
-
-char	*get_texture_path(char *line)
-{
-	char	*path;
-	char	*temp;
-	int		i;
-	int		j;
-
-	i = 0;
-	temp = ft_strtrim(line, SPACES_SET);
-	path = malloc(sizeof(char *) + (get_path_len(temp)));
-	while (temp[i] && ft_isspace(temp[i]))
-		i++;
-	j = 0;
-	while (temp[i] && !ft_isspace(temp[i]))
-		path[j++] = temp[i++];
-	path[j] = '\0';
-	free(temp);
-	return (path);
-}

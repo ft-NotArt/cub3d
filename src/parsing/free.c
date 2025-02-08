@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 20:29:00 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 02:26:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:06:58 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_all_paths(char **paths)
+static void	free_all_paths(char **paths)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:32:39 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:32:43 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,48 +179,63 @@ typedef	struct	s_parsing
 	char		**map;
 	char		**paths;
 	char		*map_in_line;
-	size_t		map_height;
-	size_t		map_width;
+	int			map_height;
+	int			map_width;
 	char		player_dir;
 	int			player_x;
 	int			player_y;
 }				t_parsing;
 
+// Args
+
+bool	args_checker(int ac, char **av);
+
+// Check
+
+bool	check_map_spawn(char **map);
+bool	check_path_order(char *line, t_txtr_id id);
+bool	check_paths_count(t_parsing *parsing);
+
+// Debug
+
+void	print_map(char **map);
+void	print_paths(t_parsing *parsing);
+
+// Floodfill
+
+void	flood_fill(char **map, int y, int x, t_parsing *parsing);
+char	**create_floodfill_map(t_parsing *parsing);
+
+// Free
+
+void	free_parsing(t_parsing *parsing);
+
+// Is
+
+bool	is_map_charset(char *line);
+bool	is_path_charset(char *line);
+bool	is_valid_map(char *filename, t_parsing *parsing);
+bool	is_space_line(char *line);
+
+// Map
+
+size_t	get_map_height(char **map);
+size_t	get_higher_len(char **map);
+bool	get_map_data(char *filename, t_parsing *parsing);
+
+// Parsing
+
+int	handle_open(char *filename);
+
+// Path
+
+bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line);
+int		get_path_id(char *line);
+
 // Player
 
 size_t	get_player_x_pos(char **map);
 size_t	get_player_y_pos(char **map);
-
-// Paths
-
-bool	count_path_words(char *line);
-size_t	get_path_len(char *temp);
-char	*get_texture_path(char *line);
-bool	get_map_data(char *filename, t_parsing *parsing);
-int		get_path_id(char *line);
-bool	check_paths_count(t_parsing *parsing);
-
-// Map
-
-size_t	get_higher_line_len(char **map);
-bool	is_valid_map(char *filename, t_parsing *parsing);
-void	flood_fill(char **map, int y, int x, int height);
-
-bool		args_checker(int ac, char **av);
-void		print_map(char **map);
-bool		is_map_charset(char *line);
-bool		is_path_charset(char *line);
-void		print_paths(t_parsing *parsing);
-void		free_parsing(t_parsing *parsing);
-bool		get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line);
-char		**create_floodfill_map(t_parsing *parsing);
-void		get_player_pos(char **map, t_parsing *parsing);
-bool		is_playable_map(t_parsing *parsing);
-bool		check_paths(t_parsing *parsing);
-size_t		get_map_height(char **map);
-t_parsing	*init_parsing();
-size_t		get_player_direction(char **map);
-bool		count_path_words(char *line);
-
+size_t	get_player_direction(char **map);
 
 #endif

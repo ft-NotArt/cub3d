@@ -3,15 +3,17 @@ SO textures/test/south.xpm
 WE textures/test/west.xpm
 EA textures/test/east.xpm
 
-F 20,20,20
-C 200,200,200
+
+DO DSFF
+F dsds
+C ds
 
 11111
+10101
+11N0D
+10101
 10001
-10S01
 10001
-10001
-00001
 11001
 10001
 10001

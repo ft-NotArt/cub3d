@@ -6,13 +6,13 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 06:00:24 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:00:12 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_parsing	*init_parsing()
+static t_parsing	*init_parsing(void)
 {
 	t_parsing	*parsing;
 
@@ -29,7 +29,20 @@ t_parsing	*init_parsing()
 	return (parsing);
 }
 
-int main(int ac, char **av)
+int	handle_open(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		perror(filename);
+		return (-1);
+	}
+	return (fd);
+}
+
+int	main(int ac, char **av)
 {
 	t_parsing	*parsing;
 
@@ -38,7 +51,5 @@ int main(int ac, char **av)
 	parsing = init_parsing();
 	if (!is_valid_map(av[1], parsing))
 		return (free_parsing(parsing), 1);
-	// print_paths(parsing);
-	print_map(parsing->map);
 	free_parsing(parsing);
 }

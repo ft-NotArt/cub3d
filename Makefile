@@ -43,17 +43,18 @@ FILES			=	cub3d					\
 					structs/init structs/init2 structs/free						\
 \
 					utils/utils utils/exit										\
-					parsing/map_checker		\
-					parsing/parsing 		\
-					parsing/args			\
-					parsing/debug			\
-					parsing/checker			\
-					parsing/is				\
-					parsing/free			\
-					parsing/player			\
-					parsing/map				\
-					parsing/path			\
-					parsing/floodfill		\
+\
+\
+					parsing/args												\
+					parsing/check												\
+					parsing/debug												\
+					parsing/floodfill											\
+					parsing/free												\
+					parsing/is													\
+					parsing/map													\
+					parsing/parsing												\
+					parsing/path												\
+					parsing/player												\
 
 SRC				=	$(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ				=	$(addprefix src/, $(addsuffix .o, $(FILES)))
