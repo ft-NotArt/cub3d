@@ -52,7 +52,6 @@ FILES			=	cub3d					\
 					parsing/free			\
 					parsing/player			\
 					parsing/map				\
-					parsing/inits			\
 					parsing/path			\
 					parsing/floodfill		\
 

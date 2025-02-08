@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:57:03 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/07 23:46:44 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 04:40:10 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,35 @@ bool	count_path_words(char *line)
 	return (true);
 }
 
+bool	check_path_order(char *line, t_txtr_id id)
+{
+	char	*tmp;
+
+	tmp = ft_strtrim(line, SPACES_SET);
+	if ((id == NO && (tmp[0] != 'N' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
+		|| (id == SO && (tmp[0] != 'S' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
+		|| (id == WE && (tmp[0] != 'W' || tmp[1] != 'E' || !ft_isspace(tmp[2])))
+		|| (id == EA && (tmp[0] != 'E' || tmp[1] != 'A' || !ft_isspace(tmp[2])))
+		|| (id == DO && (tmp[0] != 'D' || tmp[1] != 'O' || !ft_isspace(tmp[2])))
+		|| (id == FL && (tmp[0] != 'F' || !ft_isspace(tmp[1])))
+		|| (id == CE && (tmp[0] != 'C' || !ft_isspace(tmp[1]))))
+	{
+		return (free(tmp), false);
+	}
+	return (free(tmp), true);
+}
+
+
 bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line)
 {
-	if (id == NO && !parsing->paths[NO])
+	if (!check_path_order(line, id))
+		return (ft_printf_fd(2, "Error\nInvalid path(s) id(s) !\n"), false);
+	if (!count_path_words(line))
+	{
+		ft_printf_fd(2, "Error\nInvalid word(s) count on path line !\n");
+		return (false);
+	}
+	else if (id == NO && !parsing->paths[NO])
 		parsing->paths[NO] = get_texture_path(line);
 	else if (id == SO && !parsing->paths[SO])
 		parsing->paths[SO] = get_texture_path(line);
@@ -81,10 +107,7 @@ bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line)
 	else if (id == CE && !parsing->paths[CE])
 		parsing->paths[CE] = get_texture_path(line);
 	else
-	{
-		ft_printf_fd(2, "Error\nPath duplication in map !\n");
-		return (false);
-	}
+		return (ft_printf_fd(2, "Error\nPath duplication in map !\n"), false);
 	return (true);
 }
 
@@ -116,6 +139,7 @@ bool	check_paths_count(t_parsing *parsing)
 	{
 		if (!parsing->paths[i])
 		{
+			ft_printf_fd(2, "Error\nPath(s) are missing !\n");
 			return (false);
 		}
 		i++;
@@ -130,7 +154,7 @@ char	*get_texture_path(char *line)
 	int		i;
 	int		j;
 
-	i = 2;
+	i = 0;
 	temp = ft_strtrim(line, SPACES_SET);
 	path = malloc(sizeof(char *) + (get_path_len(temp)));
 	while (temp[i] && ft_isspace(temp[i]))

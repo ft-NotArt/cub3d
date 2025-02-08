@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:31:50 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:32:33 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ void		close_failure(void *param);
 // ? PARSING
 # define SPACES_SET " \t\r\v\f"
 
+static int	status = 0;
+
 typedef enum	s_txtr_id
 {
 	NO,
@@ -179,7 +181,8 @@ typedef	struct	s_parsing
 	char		**map;
 	char		**paths;
 	char		*map_in_line;
-	int			map_height;
+	size_t		map_height;
+	size_t		map_width;
 	char		player_dir;
 	int			player_x;
 	int			player_y;
@@ -197,11 +200,13 @@ size_t	get_path_len(char *temp);
 char	*get_texture_path(char *line);
 bool	get_map_data(char *filename, t_parsing *parsing);
 int		get_path_id(char *line);
+bool	check_paths_count(t_parsing *parsing);
 
 // Map
 
 size_t	get_higher_line_len(char **map);
 bool	is_valid_map(char *filename, t_parsing *parsing);
+void	flood_fill(char **map, int y, int x, int height);
 
 bool		args_checker(int ac, char **av);
 void		print_map(char **map);

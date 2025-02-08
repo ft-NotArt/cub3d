@@ -6,18 +6,11 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 02:05:38 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 05:15:08 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	is_valid_map(char *filename, t_parsing *parsing)
-{
-	if (!get_map_data(filename, parsing))
-		return (false);
-	return (true);
-}
 
 static int	handle_open(char *filename)
 {
@@ -32,20 +25,6 @@ static int	handle_open(char *filename)
 	return (fd);
 }
 
-char	*handle_map(char *map_in_line, char *line)
-{
-	char	*temp;
-
-	if (line[0] == '\n' || !is_map_charset(line))
-	{
-		ft_printf_fd(2, "Error\nInvalid characters in the map !\n");
-		exit(1);
-	}
-	temp = ft_strjoin(map_in_line, line);
-	map_in_line = temp;
-	return (map_in_line);
-}
-
 bool	get_map_line(char *line, t_parsing *parsing)
 {
 	char	*temp;
@@ -56,11 +35,12 @@ bool	get_map_line(char *line, t_parsing *parsing)
 		return (false);
 	}
 	temp = parsing->map_in_line;
-	parsing->map_in_line = handle_map(parsing->map_in_line, line);
+	parsing->map_in_line = ft_strjoin(parsing->map_in_line, line);
 	free(temp);
 	return (true);
 }
 
+// TODO handle when only having a single letter in paths
 bool	parse_each_line(char *line, t_parsing *parsing)
 {
 	static bool in_map = false;
@@ -93,6 +73,8 @@ bool	get_map_data(char *filename, t_parsing *parsing)
 	if (fd == -1)
 		return (false);
 	line = get_next_line(fd);
+	if (!line)
+		return (ft_printf_fd(2, "Error\nMap is empty !\n"), false);
 	parsing->map_in_line = ft_strdup("");
 	while (line)
 	{
@@ -102,6 +84,5 @@ bool	get_map_data(char *filename, t_parsing *parsing)
 		line = get_next_line(fd);
 	}
 	parsing->map = ft_split(parsing->map_in_line, '\n');
-	free(parsing->map_in_line);
 	return (true);
 }
