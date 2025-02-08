@@ -1,0 +1,144 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/07 19:57:03 by albillie          #+#    #+#             */
+/*   Updated: 2025/02/07 23:46:44 by albillie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+size_t	get_path_len(char *temp)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (!ft_isspace(temp[i]))
+	{
+		i++;
+	}
+	while (ft_isspace(temp[i]))
+	{
+		i++;
+	}
+	while (!ft_isspace(temp[i]))
+	{
+		i++;
+		len++;
+	}
+	return (len);
+}
+
+bool	count_path_words(char *line)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		while (ft_isspace(line[i]))
+		{
+			i++;
+		}
+		if (line[i])
+		{
+			count++;
+		}
+		while (line[i] && !ft_isspace(line[i]))
+		{
+			i++;
+		}
+	}
+	if (count != 2)
+	{
+		return (false);
+	}
+	return (true);
+}
+
+bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line)
+{
+	if (id == NO && !parsing->paths[NO])
+		parsing->paths[NO] = get_texture_path(line);
+	else if (id == SO && !parsing->paths[SO])
+		parsing->paths[SO] = get_texture_path(line);
+	else if (id == WE && !parsing->paths[WE])
+		parsing->paths[WE] = get_texture_path(line);
+	else if (id == EA && !parsing->paths[EA])
+		parsing->paths[EA] = get_texture_path(line);
+	else if (id == DO && !parsing->paths[DO])
+		parsing->paths[DO] = get_texture_path(line);
+	else if (id == FL && !parsing->paths[FL])
+		parsing->paths[FL] = get_texture_path(line);
+	else if (id == CE && !parsing->paths[CE])
+		parsing->paths[CE] = get_texture_path(line);
+	else
+	{
+		ft_printf_fd(2, "Error\nPath duplication in map !\n");
+		return (false);
+	}
+	return (true);
+}
+
+int	get_path_id(char *line)
+{
+	if (ft_strnstr(line, "NO", ft_strlen(line)))
+		return (NO);
+	else if (ft_strnstr(line, "SO", ft_strlen(line)))
+		return (SO);
+	else if (ft_strnstr(line, "WE", ft_strlen(line)))
+		return (WE);
+	else if (ft_strnstr(line, "EA", ft_strlen(line)))
+		return (EA);
+	else if (ft_strnstr(line, "DO", ft_strlen(line)))
+		return (DO);
+	else if (ft_strnstr(line, "F", ft_strlen(line)))
+		return (FL);
+	else if (ft_strnstr(line, "C", ft_strlen(line)))
+		return (CE);
+	return (-1);
+}
+
+bool	check_paths_count(t_parsing *parsing)
+{
+	int	i;
+
+	i = 0;
+	while (i < PATHS_COUNT)
+	{
+		if (!parsing->paths[i])
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+char	*get_texture_path(char *line)
+{
+	char	*path;
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 2;
+	temp = ft_strtrim(line, SPACES_SET);
+	path = malloc(sizeof(char *) + (get_path_len(temp)));
+	while (temp[i] && ft_isspace(temp[i]))
+		i++;
+	j = 0;
+	while (temp[i] && !ft_isspace(temp[i]))
+		path[j++] = temp[i++];
+	path[j] = '\0';
+	free(temp);
+	return (path);
+}

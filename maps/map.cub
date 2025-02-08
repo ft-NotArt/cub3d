@@ -1,21 +1,19 @@
-               NO efdfdfd
-SO ./path_to_the_south_texture
-
-
-
-               			 WE ./path_to_the_west_texture
-
-   			    DO  fjhshjfsjhf
+                    NO athtotest
+      SO            ./path_to_the_south_texture
 
 
 
 
-			F 		./path_to_the_floor_texture
- 	EA 			./path_to_the_east_texture
+          DO  fjhshjfsjhf
 
 
 
-C ./path_to_the_ceilling_texture
+
+       F ./path_to_the_floor_texture
+   C   ./path_to_the_ceilling_texture
+  					  EA 			./path_to_the_east_texture
+
+
 
 
           1111111111111111111111111
@@ -25,6 +23,7 @@ C ./path_to_the_ceilling_texture
 111111111111000001110000000000001
 100000000011000001110111111111111
 11110111111111011100000000001
+WE rffsfs
 11110111111111011101010010001
 11000000110101011100000010001
 10000000000000000000000010001

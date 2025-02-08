@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:31:24 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:31:50 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void		close_success(void *param);
 void		close_failure(void *param);
 
 // ? PARSING
+# define SPACES_SET " \t\r\v\f"
 
 typedef enum	s_txtr_id
 {
@@ -177,6 +178,7 @@ typedef	struct	s_parsing
 {
 	char		**map;
 	char		**paths;
+	char		*map_in_line;
 	int			map_height;
 	char		player_dir;
 	int			player_x;
@@ -188,12 +190,23 @@ typedef	struct	s_parsing
 size_t	get_player_x_pos(char **map);
 size_t	get_player_y_pos(char **map);
 
+// Paths
+
+bool	count_path_words(char *line);
+size_t	get_path_len(char *temp);
+char	*get_texture_path(char *line);
+bool	get_map_data(char *filename, t_parsing *parsing);
+int		get_path_id(char *line);
+
+// Map
+
+size_t	get_higher_line_len(char **map);
+bool	is_valid_map(char *filename, t_parsing *parsing);
 
 bool		args_checker(int ac, char **av);
 void		print_map(char **map);
-char		**get_map_data(char *filename);
 bool		is_map_charset(char *line);
-bool		is_map_identifier(char *line);
+bool		is_path_charset(char *line);
 void		print_paths(t_parsing *parsing);
 void		free_parsing(t_parsing *parsing);
 bool		get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line);
@@ -202,8 +215,9 @@ void		get_player_pos(char **map, t_parsing *parsing);
 bool		is_playable_map(t_parsing *parsing);
 bool		check_paths(t_parsing *parsing);
 size_t		get_map_height(char **map);
-t_parsing	*init_parsing(char *filename);
+t_parsing	*init_parsing();
 size_t		get_player_direction(char **map);
+bool		count_path_words(char *line);
 
 
 #endif

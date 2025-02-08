@@ -6,23 +6,24 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:16:13 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/07 18:26:22 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 02:04:38 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_parsing	*init_parsing(char *filename)
+t_parsing	*init_parsing()
 {
 	t_parsing	*parsing;
 
 	parsing = malloc(sizeof(t_parsing));
-	parsing->map = get_map_data(filename);
-	parsing->paths = malloc(sizeof(char *) * 8);
-	ft_bzero(parsing->paths, 8 * sizeof(char *));
-	parsing->map_height = get_map_height(parsing->map);
-	parsing->player_x = get_player_x_pos(parsing->map);
-	parsing->player_y = get_player_y_pos(parsing->map);
-	parsing->player_dir = get_player_direction(parsing->map);
+	parsing->paths = malloc(sizeof(char *) * (PATHS_COUNT + 1));
+	ft_bzero(parsing->paths, (PATHS_COUNT + 1) * sizeof(char *));
+	parsing->map = NULL;
+	parsing->map_in_line = NULL;
+	parsing->map_height = 0;
+	parsing->player_x = 0;
+	parsing->player_y = 0;
+	parsing->player_dir = 0;
 	return (parsing);
 }

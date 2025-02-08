@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:45:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/07 01:30:40 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 00:00:51 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 bool	is_map_charset(char *line)
 {
-	if (ft_strchr(line, '0') || ft_strchr(line, '1') || ft_strchr(line, 'N')
-		|| ft_strchr(line, 'S') || ft_strchr(line, 'E') || ft_strchr(line, 'W'))
+	if (ft_strchr(line, '0') || ft_strchr(line, '1'))
 	{
 		return (true);
 	}
 	return (false);
 }
 
-bool	is_map_identifier(char *line)
+bool	is_path_charset(char *line)
 {
 	int	len;
 
@@ -35,4 +34,14 @@ bool	is_map_identifier(char *line)
 		return (true);
 	}
 	return (false);
+}
+
+bool	is_playable_map(t_parsing *parsing)
+{
+	char	**flood_map;
+
+	flood_map = create_floodfill_map(parsing);
+	print_map(flood_map);
+	// flood_fill(flood_map, parsing->player_x, parsing->player_y, parsing->map_height);
+	return (true);
 }
