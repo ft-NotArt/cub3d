@@ -35,6 +35,7 @@ FILES			=	cub3d														\
 					game/raycasting/door										\
 					game/movement game/hooks									\
 					game/animation												\
+					game/minimap												\
 \
 					structs/init structs/init2 structs/free						\
 \

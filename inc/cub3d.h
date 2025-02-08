@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 23:25:03 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:25:16 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@
 
 # define NB_TXTRS 7
 # define NB_FRAMES 18
+
+# define MINIMAP_SIZE 250
+
+# define PI 3.14159265358979323846
 
 /*** TYPEDEF ***/
 
@@ -106,6 +110,7 @@ typedef struct s_cub3d
 	mlx_image_t			*screen ;
 	mlx_image_t			**txtrs ;
 	mlx_image_t			**frames ;
+	mlx_image_t			*minimap ;
 	int					frame ;
 	struct s_raycasting	*raycast ;
 }	t_cub3d ;
@@ -123,6 +128,7 @@ void		rotate(t_cub3d *cub3d, double rot_speed);
 // Display
 void		draw_crosshair(t_cub3d *cub3d);
 void		put_AWP_anim_to_window(t_cub3d *cub3d);
+void		minimap(t_cub3d *cub3d);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:32:25 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 16:26:13 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:50:09 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	main()
 	pars->map = malloc(sizeof(char *) * 9);
 
 	pars->map[0] = ft_strdup("11111111");
-	pars->map[1] = ft_strdup("10000001");
-	pars->map[2] = ft_strdup("1000DD01");
-	pars->map[3] = ft_strdup("10000001");
-	pars->map[4] = ft_strdup("10000001");
-	pars->map[5] = ft_strdup("10000001");
-	pars->map[6] = ft_strdup("10000001");
+	pars->map[1] = ft_strdup("1DDDDDD1");
+	pars->map[2] = ft_strdup("100000D1");
+	pars->map[3] = ft_strdup("100000D1");
+	pars->map[4] = ft_strdup("100000D1");
+	pars->map[5] = ft_strdup("100000D1");
+	pars->map[6] = ft_strdup("100000D1");
 	pars->map[7] = ft_strdup("11111111");
 	pars->map[8] = NULL ;
 
