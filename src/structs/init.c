@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 22:25:38 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:16:12 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ t_vector	*vector_init(double x, double y)
 
 static void	dir_and_plane_vector_init(t_raycast *raycast, t_parsing *pars)
 {
-	if (pars->dir == NO)
+	if (pars->player_dir == NO)
 	{
 		raycast->dir = vector_init(0, 1);
 		raycast->plane = vector_init(0.66, 0);
 	}
-	else if (pars->dir == SO)
+	else if (pars->player_dir == SO)
 	{
 		raycast->dir = vector_init(0, -1);
 		raycast->plane = vector_init(-0.66, 0);
 	}
-	else if (pars->dir == EA)
+	else if (pars->player_dir == EA)
 	{
 		raycast->dir = vector_init(1, 0);
 		raycast->plane = vector_init(0, -0.66);

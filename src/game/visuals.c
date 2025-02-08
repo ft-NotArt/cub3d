@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation.c                                        :+:      :+:    :+:   */
+/*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 15:58:55 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:05:22 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ void	put_AWP_anim_to_window(t_cub3d *cub3d)
 		cub3d->frames[i]->enabled = false ;
 	}
 	cub3d->frames[0]->enabled = true ;
+}
+
+void	set_visuals(t_cub3d *cub3d)
+{
+	draw_crosshair(cub3d);
+	put_AWP_anim_to_window(cub3d);
+	mlx_set_mouse_pos(cub3d->mlx, (SCREENWIDTH / 2), (SCREENHEIGHT / 2));
+	mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_HIDDEN);
 }

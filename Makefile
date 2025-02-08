@@ -20,7 +20,8 @@ LIBMLX 			=	$(MLX)/build/libmlx42.a
 
 MAKEFLAGS		+=	-s
 CFLAGS			=	-Wall -Werror -Wextra -g -pthread							\
-					-Iinc -Ilibft -Ilibft/gnl -IMLX42/include -Ilibft/printf/ft_printf_fd					\
+					-I inc -I libft -I libft/gnl -I libft/printf/ft_printf_fd	\
+					-I MLX42/include											\
 					-D SCREENWIDTH=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f1)	\
 					-D SCREENHEIGHT=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f2)	\
 
@@ -28,33 +29,29 @@ LFLAGS			=	-ldl -lglfw -lm												\
 
 # FILES
 
-FILES			=	cub3d					\
-					parsing/parsing 		\
-					parsing/args_checker 	\
-					parsing/debug			\
+FILES			=	cub3d														\
+\
+					parsing/args												\
+					parsing/check												\
+					parsing/debug												\
+					parsing/floodfill											\
+					parsing/is													\
+					parsing/map													\
+					parsing/parsing												\
+					parsing/path												\
+					parsing/player												\
 \
 					game/raycasting/raycasting game/raycasting/raycasting_calc	\
 					game/raycasting/raycasting_background						\
 					game/raycasting/door										\
 					game/movement game/hooks									\
-					game/animation												\
+					game/visuals												\
 					game/minimap												\
 \
 					structs/init structs/init2 structs/free						\
 \
 					utils/utils utils/exit										\
 \
-\
-					parsing/args												\
-					parsing/check												\
-					parsing/debug												\
-					parsing/floodfill											\
-					parsing/free												\
-					parsing/is													\
-					parsing/map													\
-					parsing/parsing												\
-					parsing/path												\
-					parsing/player												\
 
 SRC				=	$(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJ				=	$(addprefix src/, $(addsuffix .o, $(FILES)))

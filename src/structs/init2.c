@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:25:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 17:49:51 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:36:49 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	cub3d_init_img(t_cub3d *cub3d, t_parsing *pars)
 
 	i = -1 ;
 	while (++i < NB_TXTRS)
-		cub3d->txtrs[i] = get_mlx_img(cub3d, pars, pars->txtr_paths[i]);
+		cub3d->txtrs[i] = get_mlx_img(cub3d, pars, pars->paths[i]);
 	cub3d->txtrs[i] = NULL ;
 	mlx_resize_image(cub3d->txtrs[FL], 256, 256);
 	mlx_resize_image(cub3d->txtrs[CE], 256, 256);
@@ -51,6 +51,8 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 	ft_bzero(cub3d->frames, sizeof(mlx_image_t *) * (NB_FRAMES + 1));
 	cub3d->map = pars->map ;
 	pars->map = NULL ;
+	cub3d->map_width = pars->map_width ;
+	cub3d->map_height = pars->map_height ;
 	cub3d->raycast = raycast_init(pars);
 	cub3d->mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "CUB3D", false);
 	if (!cub3d->mlx)

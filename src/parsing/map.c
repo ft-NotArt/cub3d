@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:19:30 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 20:10:31 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:44:16 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,16 @@ bool	get_map_data(char *filename, t_parsing *parsing)
 		return (false);
 	line = get_next_line(fd);
 	if (!line)
-		return (ft_printf_fd(2, "Error\nMap is empty !\n"), false);
+		return (ft_printf_fd(2, "Error\nFile is empty !\n"), close(fd), false);
 	parsing->map_in_line = ft_strdup("");
 	while (line)
 	{
 		if (!parse_each_line(line, parsing))
-			return (free(line), false);
+			return (free(line), close(fd), false);
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	parsing->map = ft_split(parsing->map_in_line, '\n');
 	if (!parsing->map[0])
 		return (ft_printf_fd(2, "Error\nMap is empty !\n"), false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:07:16 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/07 20:05:27 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:12:12 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	get_player_y_pos(char **map)
 	return (0);
 }
 
-static size_t	convert_player_dir(char dir)
+static t_txtr_id	convert_player_dir(char dir)
 {
 	if (dir == 'N')
 	{
@@ -79,7 +79,7 @@ static size_t	convert_player_dir(char dir)
 	return (0);
 }
 
-size_t	get_player_direction(char **map)
+t_txtr_id	get_player_direction(char **map)
 {
 	int	y;
 	int	x;

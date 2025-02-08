@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:50:24 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 19:52:43 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:38:47 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	check_paths_count(t_parsing *parsing)
 	int	i;
 
 	i = 0;
-	while (i < PATHS_COUNT)
+	while (i < NB_TXTRS)
 	{
 		if (!parsing->paths[i])
 		{

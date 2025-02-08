@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:54:14 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 22:38:42 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:20:34 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	free_parsing(t_parsing *parsing)
 	}
 	i = -1 ;
 	while (++i < NB_TXTRS)
-		if (parsing->txtr_paths[i])
-			free(parsing->txtr_paths[i]);
-	free(parsing->txtr_paths);
+		if (parsing->paths[i])
+			free(parsing->paths[i]);
+	free(parsing->paths);
+	if (parsing->map_in_line)
+		free(parsing->map_in_line);
 	if (parsing->pos)
 		free(parsing->pos);
 	free(parsing);

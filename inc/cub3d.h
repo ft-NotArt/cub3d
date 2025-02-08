@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:32:43 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:36:02 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 
 # define PI 3.14159265358979323846
 
+# define SPACES_SET " \t\r\v\f"
+
 /*** TYPEDEF ***/
 
 typedef enum s_txtr_id
@@ -72,14 +74,26 @@ typedef struct s_vector
 	double	y ;
 }	t_vector ;
 
-//TODO: Could modify paths to an array (then use txtr_id enum as index)
 typedef	struct	s_parsing
 {
-	char		**map;
-	char		**txtr_paths;
+	char			**map;
+	char			**paths;
+	char			*map_in_line;
+	int				map_height;
+	int				map_width;
+	t_txtr_id		player_dir;
 	struct s_vector	*pos ;
-	t_txtr_id		dir ;
 }				t_parsing;
+
+
+// //TODO: Could modify paths to an array (then use txtr_id enum as index)
+// typedef	struct	s_parsing
+// {
+// 	char		**map;
+// 	char		**txtr_paths;
+// 	struct s_vector	*pos ;
+// 	t_txtr_id		dir ;
+// }				t_parsing;
 
 typedef struct s_raycasting
 {
@@ -106,6 +120,8 @@ typedef struct s_raycasting
 typedef struct s_cub3d
 {
 	char				**map ;
+	int					map_height;
+	int					map_width;
 	mlx_t				*mlx ;
 	mlx_image_t			*screen ;
 	mlx_image_t			**txtrs ;
@@ -126,6 +142,7 @@ void		move(t_cub3d *cub3d, double dir1, double dir2, double move_speed);
 void		rotate(t_cub3d *cub3d, double rot_speed);
 
 // Display
+void		set_visuals(t_cub3d *cub3d);
 void		draw_crosshair(t_cub3d *cub3d);
 void		put_AWP_anim_to_window(t_cub3d *cub3d);
 void		minimap(t_cub3d *cub3d);
@@ -159,32 +176,6 @@ void		free_cub3d(t_cub3d *cub3d);
 // Close
 void		close_success(void *param);
 void		close_failure(void *param);
-
-// ? PARSING
-# define SPACES_SET " \t\r\v\f"
-
-typedef enum	s_txtr_id
-{
-	NO,
-	SO,
-	WE,
-	EA,
-	DO,
-	FL,
-	CE,
-}				t_txtr_id;
-
-typedef	struct	s_parsing
-{
-	char		**map;
-	char		**paths;
-	char		*map_in_line;
-	int			map_height;
-	int			map_width;
-	char		player_dir;
-	int			player_x;
-	int			player_y;
-}				t_parsing;
 
 // Args
 
@@ -225,6 +216,7 @@ bool	get_map_data(char *filename, t_parsing *parsing);
 
 // Parsing
 
+t_parsing	*init_parsing(void);
 int	handle_open(char *filename);
 
 // Path
@@ -236,6 +228,6 @@ int		get_path_id(char *line);
 
 size_t	get_player_x_pos(char **map);
 size_t	get_player_y_pos(char **map);
-size_t	get_player_direction(char **map);
+t_txtr_id	get_player_direction(char **map);
 
 #endif

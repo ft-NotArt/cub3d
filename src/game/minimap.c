@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:37:21 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:15:50 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:38:55 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ int player_minimap_y = player_y * minimap_size / map_height;
 draw_circle(player_minimap_x, player_minimap_y, 3, 0xFF0000);  // Red color
 */
 
-// TODO: replace those
-# define MAP_WIDTH 8
-# define MAP_HEIGHT 8
-
 void	minimap(t_cub3d *cub3d)
 {
 	double	map_x ;
@@ -63,10 +59,10 @@ void	minimap(t_cub3d *cub3d)
     double player_y = cub3d->raycast->pos->y;
 
 	map_y = 0 ;
-	while (map_y < MAP_HEIGHT)
+	while (map_y < cub3d->map_height)
 	{
 		map_x = 0 ;
-		while (map_x < MAP_WIDTH)
+		while (map_x < cub3d->map_width)
 		{
 			if (cub3d->map[(int) map_y][(int) map_x] == '1')
 			{
@@ -74,8 +70,8 @@ void	minimap(t_cub3d *cub3d)
 								  - sin(angle) * (map_y - player_y) + player_x;
 				double	rotated_y = sin(angle) * (map_x - player_x)
 								  + cos(angle) * (map_y - player_y) + player_y;
-				int	minimap_x = (rotated_y - player_y) * MINIMAP_SIZE / MAP_WIDTH + MINIMAP_SIZE / 2 ;
-				int	minimap_y = (rotated_x - player_x) * MINIMAP_SIZE / MAP_HEIGHT + MINIMAP_SIZE / 2 ;
+				int	minimap_x = (rotated_y - player_y) * MINIMAP_SIZE / cub3d->map_width + MINIMAP_SIZE / 2 ;
+				int	minimap_y = (rotated_x - player_x) * MINIMAP_SIZE / cub3d->map_height + MINIMAP_SIZE / 2 ;
 
 
 				if (minimap_x >= 0 && minimap_x < MINIMAP_SIZE &&
