@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:13:02 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:20:08 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,7 @@ bool	is_space_line(char *line);
 size_t	get_map_height(char **map);
 size_t	get_higher_len(char **map);
 bool	get_map_data(char *filename, t_parsing *parsing);
+bool	check_map_chars(char **map);
 
 // Parsing
 

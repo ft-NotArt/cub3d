@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:19:30 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 21:44:16 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:20:26 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ bool	get_map_data(char *filename, t_parsing *parsing)
 	}
 	close(fd);
 	parsing->map = ft_split(parsing->map_in_line, '\n');
+	if (!check_map_chars(parsing->map))
+		return (ft_printf_fd(2, "Error\nInvalid charset in map !\n"), false);
 	if (!parsing->map[0])
 		return (ft_printf_fd(2, "Error\nMap is empty !\n"), false);
 	return (true);

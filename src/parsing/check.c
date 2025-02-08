@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:50:24 by albillie          #+#    #+#             */
-/*   Updated: 2025/02/08 21:38:47 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:20:15 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,30 @@ bool	check_paths_count(t_parsing *parsing)
 			return (false);
 		}
 		i++;
+	}
+	return (true);
+}
+
+bool	check_map_chars(char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'N'
+				&& map[y][x] != 'S' && map[y][x] != 'W' && map[y][x] != 'E'
+				&& map[y][x] != 'D' && map[y][x] != ' ' && map[y][x] != '\n')
+			{
+				return (false);
+			}
+			x++;
+		}
+		y++;
 	}
 	return (true);
 }
