@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:22:59 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/07 21:12:52 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:53:10 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw_background(t_cub3d *cub3d, t_raycast *raycast,
 		raycast->rowDist = (0.5 * SCREENHEIGHT) / (y - SCREENHEIGHT / 2);
 		raycast->floor->x = raycast->pos->x
 			+ raycast->rowDist * raycast->rayDir->x ;
-		raycast->floor->y = raycast->pos->y
+		raycast->floor->y = -raycast->pos->y
 			+ raycast->rowDist * raycast->rayDir->y ;
 		x = -1 ;
 		while (++x < SCREENWIDTH)

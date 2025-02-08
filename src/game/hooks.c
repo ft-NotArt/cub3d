@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:39:22 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 23:30:21 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:46:36 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	frame_loop(void *param)
 		cub3d->frames[cub3d->frame + (cub3d->frame == -1)]->enabled = true ;
 	}
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
-		move(cub3d, cub3d->raycast->dir->x, cub3d->raycast->dir->y, MOVE_SPEED);
+		move(cub3d, cub3d->raycast->dir->x, -cub3d->raycast->dir->y, MOVE_SPEED);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
-		move(cub3d, -cub3d->raycast->dir->x, -cub3d->raycast->dir->y, MOVE_SPEED);
+		move(cub3d, -cub3d->raycast->dir->x, cub3d->raycast->dir->y, MOVE_SPEED);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
-		move(cub3d, cub3d->raycast->dir->y, -cub3d->raycast->dir->x, MOVE_SPEED * 0.75);
+		move(cub3d, cub3d->raycast->dir->y, cub3d->raycast->dir->x, MOVE_SPEED * 0.75);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
-		move(cub3d, -cub3d->raycast->dir->y, cub3d->raycast->dir->x, MOVE_SPEED * 0.75);
+		move(cub3d, -cub3d->raycast->dir->y, -cub3d->raycast->dir->x, MOVE_SPEED * 0.75);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))
 		rotate(cub3d, -ROT_SPEED);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:08:07 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 20:27:35 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:37:19 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	raycast_to_door(t_cub3d *cub3d, bool AWP)
 	raycast->map->x = (int) raycast->pos->x ;
 	raycast->map->y = (int) raycast->pos->y ;
 	raycast->rayDir->x = raycast->dir->x;
-	raycast->rayDir->y = raycast->dir->y;
+	raycast->rayDir->y = -raycast->dir->y;
 	calc_deltaDist(raycast);
 	calc_step_and_sideDist(raycast);
 	DDA_algo_on_door(cub3d, raycast, AWP);

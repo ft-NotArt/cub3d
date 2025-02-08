@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/05 18:15:22 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:55:29 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	DDA_algo(t_cub3d *cub3d, t_raycast *raycast)
 		{
 			raycast->sideDist->y += raycast->deltaDist->y;
 			raycast->map->y += raycast->step->y;
-			raycast->side = NO + (raycast->step->y != 1);
+			raycast->side = NO + (raycast->step->y == 1);
 		}
 	}
 	raycast->door = false ;
@@ -91,7 +91,7 @@ void	raycasting(t_cub3d *cub3d)
 		raycast->map->y = (int) raycast->pos->y ;
 		cameraX = 2 * x / (double) SCREENWIDTH - 1;
 		raycast->rayDir->x = raycast->dir->x + raycast->plane->x * cameraX;
-		raycast->rayDir->y = raycast->dir->y + raycast->plane->y * cameraX;
+		raycast->rayDir->y = -(raycast->dir->y + raycast->plane->y * cameraX);
 		calc_deltaDist(raycast);
 		calc_step_and_sideDist(raycast);
 		DDA_algo(cub3d, raycast);
