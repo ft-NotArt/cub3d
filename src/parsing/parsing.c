@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:45:48 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 05:43:42 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:00:24 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int main(int ac, char **av)
 	if (!is_valid_map(av[1], parsing))
 		return (free_parsing(parsing), 1);
 	// print_paths(parsing);
-	// print_map(parsing->map);
+	print_map(parsing->map);
 	free_parsing(parsing);
 }

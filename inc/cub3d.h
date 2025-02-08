@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 21:32:33 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:32:39 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,6 @@ void		close_failure(void *param);
 
 // ? PARSING
 # define SPACES_SET " \t\r\v\f"
-
-static int	status = 0;
 
 typedef enum	s_txtr_id
 {

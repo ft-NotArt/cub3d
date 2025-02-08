@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:25:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 05:15:08 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:01:24 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ bool	get_map_data(char *filename, t_parsing *parsing)
 		line = get_next_line(fd);
 	}
 	parsing->map = ft_split(parsing->map_in_line, '\n');
+	if (!parsing->map[0])
+		return (ft_printf_fd(2, "Error\nMap is empty !\n"), false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:45:18 by kaveo             #+#    #+#             */
-/*   Updated: 2025/02/08 05:43:14 by albillie         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:01:11 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,41 @@ bool	is_playable_map(t_parsing *parsing)
 	return (true);
 }
 
-bool	check_valid_paths(t_parsing *parsing)
+bool	check_map_spawn(char **map)
 {
-	if (!check_paths_count(parsing))
-		return (false);
+	int	x;
+	int	y;
+	int	count;
+
+	y = 0;
+	count = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
+			{
+				count++;
+			}
+			x++;
+		}
+		y++;
+	}
+	if (count != 1)
+		return (ft_printf_fd(2, "Error\nInvalid spawn(s) count !\n"), false);
 	return (true);
 }
+
 
 bool	is_valid_map(char *filename, t_parsing *parsing)
 {
 	if (!get_map_data(filename, parsing))
 		return (false);
-	else if (!check_valid_paths(parsing))
+	else if (!check_paths_count(parsing))
+		return (false);
+	else if (!check_map_spawn(parsing->map))
 		return (false);
 	else if (!is_playable_map(parsing))
 		return (false);
