@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:36:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/07 20:37:11 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:38:10 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b, bool shadow)
 		g = (g >> 1) & 0b01111111 ;
 		b = (b >> 1) & 0b01111111 ;
 	}
-    return (r << 24 | g << 16 | b << 8 | 0xFF);
+	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
 
 mlx_image_t	*get_mlx_img(t_cub3d *cub3d, t_parsing *pars, char *file_path)

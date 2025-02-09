@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:30:11 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 03:10:17 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@
 # define GREEN 0x00FF00FF
 # define BLUE 0x0000FFFF
 
-# define SPACES_SET " \t\r\v\f"
-
 /*** TYPEDEF ***/
 
 typedef enum s_txtr_id
@@ -68,21 +66,21 @@ typedef enum s_txtr_id
 	DO,
 	FL,
 	CE
-}	t_txtr_id ;
+}	t_txtr_id;
 
 typedef struct s_point
 {
-	int	x ;
-	int	y ;
-}	t_point ;
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_vector
 {
-	double	x ;
-	double	y ;
-}	t_vector ;
+	double	x;
+	double	y;
+}	t_vector;
 
-typedef	struct	s_parsing
+typedef struct s_parsing
 {
 	char			**map;
 	char			**paths;
@@ -90,69 +88,111 @@ typedef	struct	s_parsing
 	int				map_height;
 	int				map_width;
 	t_txtr_id		player_dir;
-	struct s_vector	*pos ;
+	struct s_vector	*pos;
 }				t_parsing;
 
 typedef struct s_raycasting
 {
-	struct s_vector	*pos ;
-	struct s_vector	*dir ;
-	struct s_vector	*plane ;
-	struct s_vector	*rayDir ;
-	struct s_vector	*deltaDist ;
-	struct s_vector	*sideDist ;
-	struct s_vector	*tex ;
-	struct s_vector	*floor ;
-	struct s_point	*map ;
-	struct s_point	*step ;
-	int				lineHeight ;
-	int				drawStart ;
-	int				drawEnd ;
-	double			perpWallDist;
-	double			rowDist ;
-	t_txtr_id		side ;
-	bool			door ;
+	struct s_vector	*pos;
+	struct s_vector	*dir;
+	struct s_vector	*plane;
+	struct s_vector	*ray_dir;
+	struct s_vector	*delta_dist;
+	struct s_vector	*side_dist;
+	struct s_vector	*tex;
+	struct s_vector	*floor;
+	struct s_point	*map;
+	struct s_point	*step;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			perp_wall_dist;
+	double			row_dist;
+	t_txtr_id		side;
+	bool			door;
 }	t_raycast;
-
 
 typedef struct s_cub3d
 {
-	char				**map ;
+	char				**map;
 	int					map_height;
 	int					map_width;
-	mlx_t				*mlx ;
-	mlx_image_t			*screen ;
-	mlx_image_t			**txtrs ;
-	mlx_image_t			**frames ;
-	mlx_image_t			*minimap ;
-	int					frame ;
-	struct s_raycasting	*raycast ;
-}	t_cub3d ;
+	mlx_t				*mlx;
+	mlx_image_t			*screen;
+	mlx_image_t			**txtrs;
+	mlx_image_t			**frames;
+	mlx_image_t			*minimap;
+	int					frame;
+	struct s_raycasting	*raycast;
+}	t_cub3d;
 
 typedef struct s_minimap
 {
-	int		x ;
-	int		y ;
-	double	play_x ;
-	double	play_y ;
-	double	angle ;
-	int		radius ;
-	int		center ;
-	double	map_size ;
-	double	rot_x ;
-	double	rot_y ;
-	int		dist_x ;
-	int		dist_y ;
-}	t_minimap ;
-
+	int		x;
+	int		y;
+	double	play_x;
+	double	play_y;
+	double	angle;
+	int		radius;
+	int		center;
+	double	map_size;
+	double	rot_x;
+	double	rot_y;
+	int		dist_x;
+	int		dist_y;
+}	t_minimap;
 
 /*** FUNCTIONS ***/
+
+// Parsing
+
+t_parsing	*init_parsing(void);
+int			handle_open(char *filename);
+
+// Args
+
+bool		args_checker(int ac, char **av);
+
+// Check
+
+bool		check_map_spawn(char **map);
+bool		check_path_order(char *line, t_txtr_id id);
+bool		check_paths_count(t_parsing *parsing);
+
+// Map
+
+size_t		get_map_height(char **map);
+size_t		get_higher_len(char **map);
+bool		get_map_data(char *filename, t_parsing *parsing);
+bool		check_map_chars(char **map);
+
+// Path
+
+bool		get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line);
+int			get_path_id(char *line);
+
+// Floodfill
+
+void		flood_fill(char **map, int y, int x, t_parsing *parsing);
+char		**create_floodfill_map(t_parsing *parsing);
+
+// Player
+
+size_t		get_player_x_pos(char **map);
+size_t		get_player_y_pos(char **map);
+t_txtr_id	get_player_direction(char **map);
+
+// Init
+t_cub3d		*cub3d_init(t_parsing *pars);
+t_raycast	*raycast_init(t_parsing *pars);
+t_point		*point_init(int x, int y);
+t_vector	*vector_init(double x, double y);
 
 // Game
 void		frame_loop(void *param);
 void		keyboard_hook(mlx_key_data_t keydata, void *param);
 void		mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods,
-	void *param);
+				void *param);
 void		move(t_cub3d *cub3d, double dir1, double dir2, double move_speed);
 void		rotate(t_cub3d *cub3d, double rot_speed);
 
@@ -166,17 +206,18 @@ void		minimap(t_cub3d *cub3d);
 void		raycasting(t_cub3d *cub3d);
 void		raycast_to_door(t_cub3d *cub3d, bool AWP);
 void		draw_background(t_cub3d *cub3d, t_raycast *raycast,
-	mlx_image_t *floor, mlx_image_t *ceilling);
-void		calc_deltaDist(t_raycast *raycast);
-void		calc_step_and_sideDist(t_raycast *raycast);
+				mlx_image_t *floor, mlx_image_t *ceilling);
+void		calc_delta_dist(t_raycast *raycast);
+void		calc_step_and_side_dist(t_raycast *raycast);
 void		calc_line(t_raycast *raycast);
-int			calc_texX(t_raycast *raycast, mlx_image_t *img);
+int			calc_tex_x(t_raycast *raycast, mlx_image_t *img);
 
-// Init
-t_cub3d		*cub3d_init(t_parsing *pars);
-t_raycast	*raycast_init(t_parsing *pars);
-t_point		*point_init(int x, int y);
-t_vector	*vector_init(double x, double y);
+// Is
+
+bool		is_map_charset(char *line);
+bool		is_path_charset(char *line);
+bool		is_valid_map(char *filename, t_parsing *parsing);
+bool		is_space_line(char *line);
 
 // Utils
 void		error_mlx(void);
@@ -191,59 +232,5 @@ void		free_cub3d(t_cub3d *cub3d);
 // Close
 void		close_success(void *param);
 void		close_failure(void *param);
-
-// Args
-
-bool	args_checker(int ac, char **av);
-
-// Check
-
-bool	check_map_spawn(char **map);
-bool	check_path_order(char *line, t_txtr_id id);
-bool	check_paths_count(t_parsing *parsing);
-
-// Debug
-
-void	print_map(char **map);
-void	print_paths(t_parsing *parsing);
-
-// Floodfill
-
-void	flood_fill(char **map, int y, int x, t_parsing *parsing);
-char	**create_floodfill_map(t_parsing *parsing);
-
-// Free
-
-void	free_parsing(t_parsing *parsing);
-
-// Is
-
-bool	is_map_charset(char *line);
-bool	is_path_charset(char *line);
-bool	is_valid_map(char *filename, t_parsing *parsing);
-bool	is_space_line(char *line);
-
-// Map
-
-size_t	get_map_height(char **map);
-size_t	get_higher_len(char **map);
-bool	get_map_data(char *filename, t_parsing *parsing);
-bool	check_map_chars(char **map);
-
-// Parsing
-
-t_parsing	*init_parsing(void);
-int	handle_open(char *filename);
-
-// Path
-
-bool	get_path_by_id(t_txtr_id id, t_parsing *parsing, char *line);
-int		get_path_id(char *line);
-
-// Player
-
-size_t	get_player_x_pos(char **map);
-size_t	get_player_y_pos(char **map);
-t_txtr_id	get_player_direction(char **map);
 
 #endif

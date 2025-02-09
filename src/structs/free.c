@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:54:14 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 23:20:34 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:40:44 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ void	free_raycast(t_raycast *raycast)
 	free(raycast->pos);
 	free(raycast->dir);
 	free(raycast->plane);
-	free(raycast->rayDir);
+	free(raycast->ray_dir);
 	free(raycast->map);
-	free(raycast->deltaDist);
-	free(raycast->sideDist);
+	free(raycast->delta_dist);
+	free(raycast->side_dist);
 	free(raycast->step);
 	free(raycast->floor);
 	free(raycast->tex);
 	free(raycast);
 }
+
 void	free_cub3d(t_cub3d *cub3d)
 {
 	int	i ;

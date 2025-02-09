@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:21:56 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:53:36 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ void	put_awp_anim_to_window(t_cub3d *cub3d)
 	}
 	cub3d->frames[0]->enabled = true ;
 }
-void draw_player_cursor(mlx_image_t *img)
+
+void	draw_player_cursor(mlx_image_t *img)
 {
-	int	*points ;
+	int		*points ;
+	double	t ;
 
 	points = malloc(5 * sizeof(int));
 	points[0] = img->width / 2 ;
@@ -60,8 +62,6 @@ void draw_player_cursor(mlx_image_t *img)
 	points[2] = img->width / 2 - img->width / 3 ;
 	points[3] = img->height / 2 + img->width / 3 ;
 	points[4] = img->width / 2 + img->width / 3 ;
-	double	t ;
-
 	mlx_put_pixel(img, points[0], points[1], RED);
 	mlx_put_pixel(img, points[2], points[3], RED);
 	mlx_put_pixel(img, points[4], points[3], RED);

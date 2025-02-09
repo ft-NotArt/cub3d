@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 23:16:12 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:40:44 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ t_raycast	*raycast_init(t_parsing *pars)
 	raycast->pos = pars->pos ;
 	pars->pos = NULL ;
 	dir_and_plane_vector_init(raycast, pars);
-	raycast->rayDir = vector_init(0, 0);
-	raycast->deltaDist = vector_init(0, 0);
-	raycast->sideDist = vector_init(0, 0);
+	raycast->ray_dir = vector_init(0, 0);
+	raycast->delta_dist = vector_init(0, 0);
+	raycast->side_dist = vector_init(0, 0);
 	raycast->floor = vector_init(0, 0);
 	raycast->tex = vector_init(0, 0);
 	raycast->map = point_init(0, 0);

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:22:59 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 18:53:10 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:50:15 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,25 @@ void	draw_background(t_cub3d *cub3d, t_raycast *raycast,
 	int			y ;
 	int			x ;
 
-	y = (SCREENHEIGHT / 2) ;
+	y = (SCREENHEIGHT / 2);
 	while (++y < SCREENHEIGHT)
 	{
-		raycast->rayDir->x = raycast->dir->x - raycast->plane->x ;
-		raycast->rayDir->y = raycast->dir->y - raycast->plane->y ;
-		raycast->rowDist = (0.5 * SCREENHEIGHT) / (y - SCREENHEIGHT / 2);
+		raycast->ray_dir->x = raycast->dir->x - raycast->plane->x ;
+		raycast->ray_dir->y = raycast->dir->y - raycast->plane->y ;
+		raycast->row_dist = (0.5 * SCREENHEIGHT) / (y - SCREENHEIGHT / 2);
 		raycast->floor->x = raycast->pos->x
-			+ raycast->rowDist * raycast->rayDir->x ;
+			+ raycast->row_dist * raycast->ray_dir->x ;
 		raycast->floor->y = -raycast->pos->y
-			+ raycast->rowDist * raycast->rayDir->y ;
+			+ raycast->row_dist * raycast->ray_dir->y ;
 		x = -1 ;
 		while (++x < SCREENWIDTH)
 		{
 			draw_pixel_background(cub3d, floor, x, y);
 			draw_pixel_background(cub3d, ceilling, x, (SCREENHEIGHT - y - 1));
-			raycast->floor->x += raycast->rowDist * (raycast->dir->x
-					+ raycast->plane->x - raycast->rayDir->x) / SCREENWIDTH;
-			raycast->floor->y += raycast->rowDist * (raycast->dir->y
-					+ raycast->plane->y - raycast->rayDir->y) / SCREENWIDTH;
+			raycast->floor->x += raycast->row_dist * (raycast->dir->x
+					+ raycast->plane->x - raycast->ray_dir->x) / SCREENWIDTH;
+			raycast->floor->y += raycast->row_dist * (raycast->dir->y
+					+ raycast->plane->y - raycast->ray_dir->y) / SCREENWIDTH;
 		}
 	}
 }

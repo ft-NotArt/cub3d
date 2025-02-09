@@ -33,7 +33,6 @@ FILES			=	cub3d														\
 \
 					parsing/args												\
 					parsing/check												\
-					parsing/debug												\
 					parsing/floodfill											\
 					parsing/is													\
 					parsing/map													\
