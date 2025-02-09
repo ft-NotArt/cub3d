@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 01:21:03 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:07:52 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	draw_crosshair(t_cub3d *cub3d)
 	{
 		if (i != 11 && i != 12)
 		{
-			mlx_put_pixel(crosshair, 11, i, 0x000000FF);
-			mlx_put_pixel(crosshair, 12, i, 0x000000FF);
-			mlx_put_pixel(crosshair, i, 11, 0x000000FF);
-			mlx_put_pixel(crosshair, i, 12, 0x000000FF);
+			mlx_put_pixel(crosshair, 11, i, BLACK);
+			mlx_put_pixel(crosshair, 12, i, BLACK);
+			mlx_put_pixel(crosshair, i, 11, BLACK);
+			mlx_put_pixel(crosshair, i, 12, BLACK);
 		}
 		i++ ;
 	}
@@ -62,18 +62,18 @@ void draw_player_cursor(mlx_image_t *img)
 	points[4] = img->width / 2 + img->width / 3 ;
 	double	t ;
 
-	mlx_put_pixel(img, points[0], points[1], 0xFF0000FF);
-	mlx_put_pixel(img, points[2], points[3], 0xFF0000FF);
-	mlx_put_pixel(img, points[4], points[3], 0xFF0000FF);
+	mlx_put_pixel(img, points[0], points[1], RED);
+	mlx_put_pixel(img, points[2], points[3], RED);
+	mlx_put_pixel(img, points[4], points[3], RED);
 	t = 0 ;
 	while (t <= 1)
 	{
 		mlx_put_pixel(img, points[2] + t * (points[0] - points[2]),
-			points[3] + t * (points[1] - points[3]), 0xFF0000FF);
+			points[3] + t * (points[1] - points[3]), RED);
 		mlx_put_pixel(img, points[4] + t * (points[0] - points[4]),
-			points[3] + t * (points[1] - points[3]), 0xFF0000FF);
+			points[3] + t * (points[1] - points[3]), RED);
 		mlx_put_pixel(img, points[2] + t * (points[4] - points[2]),
-			points[3] + t * (points[3] - points[3]), 0xFF0000FF);
+			points[3] + t * (points[3] - points[3]), RED);
 		t += 0.1 ;
 	}
 	free(points);

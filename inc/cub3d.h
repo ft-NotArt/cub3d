@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 01:05:30 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:13:02 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# define PI 3.14159265358979323846
 # include <stdbool.h>
 
 /*** DEFINE ***/
@@ -37,17 +38,22 @@
 #  define SCREENHEIGHT 600
 # endif
 
-# define MOVE_SPEED 0.15
-# define ROT_SPEED 0.05
-
 # define NB_TXTRS 7
 # define NB_FRAMES 18
 
+# define SPACES_SET " \t\r\v\f"
+
+# define MOVE_SPEED 0.15
+# define ROT_SPEED 0.05
+
 # define MINIMAP_SIZE 250
 
-# define PI 3.14159265358979323846
-
-# define SPACES_SET " \t\r\v\f"
+// Colors
+# define BLACK 0x000000FF
+# define GRAY 0xC5C6C780
+# define RED 0xFF0000FF
+# define GREEN 0x00FF00FF
+# define BLUE 0x0000FFFF
 
 /*** TYPEDEF ***/
 
@@ -130,6 +136,23 @@ typedef struct s_cub3d
 	int					frame ;
 	struct s_raycasting	*raycast ;
 }	t_cub3d ;
+
+typedef struct s_minimap
+{
+	int		x ;
+	int		y ;
+	double	play_x ;
+	double	play_y ;
+	double	angle ;
+	int		radius ;
+	int		center ;
+	double	map_size ;
+	double	rot_x ;
+	double	rot_y ;
+	int		dist_x ;
+	int		dist_y ;
+}	t_minimap ;
+
 
 /*** FUNCTIONS ***/
 
