@@ -22,8 +22,6 @@ MAKEFLAGS		+=	-s
 CFLAGS			=	-Wall -Werror -Wextra -g -pthread							\
 					-I inc -I libft -I libft/gnl -I libft/printf/ft_printf_fd	\
 					-I MLX42/include											\
-					-D SCREENWIDTH=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f1)	\
-					-D SCREENHEIGHT=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f2)	\
 
 LFLAGS			=	-ldl -lglfw -lm												\
 
@@ -57,7 +55,19 @@ OBJ				=	$(addprefix src/, $(addsuffix .o, $(FILES)))
 
 # RULES
 
-all				:	$(NAME)
+all				:	fullscreen
+
+fullscreen		:	CFLAGS += -D SCREENWIDTH=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f1)
+fullscreen		:	CFLAGS += -D SCREENHEIGHT=$$(xrandr --current | grep '*' | uniq | awk '{print $$1}' | cut -d 'x' -f2)
+fullscreen		:	$(NAME)
+
+midres			:	CFLAGS += -D SCREENWIDTH=1280
+midres			:	CFLAGS += -D SCREENHEIGHT=720
+midres			:	$(NAME)
+
+lowres			:	CFLAGS += -D SCREENWIDTH=720
+lowres			:	CFLAGS += -D SCREENHEIGHT=480
+lowres			:	$(NAME)
 
 $(LIBFT_PATH)	:
 					$(MAKE) -C $(LIBFT_DIR) $(LIBFT) -j $$(nproc)
