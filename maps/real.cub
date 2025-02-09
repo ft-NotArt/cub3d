@@ -1,0 +1,19 @@
+
+NO 	textures/real/real_wall.png
+SO textures/real/real_wall.png
+
+DO textures/rust/rust_door.png
+
+WE textures/real/real_wall.png
+C  textures/real/real_floor.png
+
+F 				textures/real/real_ground.png
+
+EA 					textures/real/real_wall.png
+
+1111111
+11111111111
+100000101
+10000DN11111
+100000001
+11111111
