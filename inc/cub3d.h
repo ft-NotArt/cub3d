@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:23:47 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:30:11 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,6 @@ typedef	struct	s_parsing
 	t_txtr_id		player_dir;
 	struct s_vector	*pos ;
 }				t_parsing;
-
-
-// //TODO: Could modify paths to an array (then use txtr_id enum as index)
-// typedef	struct	s_parsing
-// {
-// 	char		**map;
-// 	char		**txtr_paths;
-// 	struct s_vector	*pos ;
-// 	t_txtr_id		dir ;
-// }				t_parsing;
 
 typedef struct s_raycasting
 {

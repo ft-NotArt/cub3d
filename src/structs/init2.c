@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:25:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:22:39 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:30:45 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	cub3d_init_img(t_cub3d *cub3d, t_parsing *pars)
 	}
 	cub3d->frames[i] = NULL ;
 }
-// TODO: load png before mlx_init, then change what happens in failure case
+
 t_cub3d	*cub3d_init(t_parsing *pars)
 {
 	t_cub3d	*cub3d ;
@@ -54,13 +54,13 @@ t_cub3d	*cub3d_init(t_parsing *pars)
 	cub3d->map_width = pars->map_width ;
 	cub3d->map_height = pars->map_height ;
 	cub3d->raycast = raycast_init(pars);
+	cub3d_init_img(cub3d, pars);
 	cub3d->mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "CUB3D", false);
 	if (!cub3d->mlx)
 		(error_mlx(), free_parsing(pars), close_failure(cub3d));
 	cub3d->screen = mlx_new_image(cub3d->mlx, SCREENWIDTH, SCREENHEIGHT);
 	mlx_image_to_window(cub3d->mlx, cub3d->screen, 0, 0);
 	mlx_set_instance_depth(cub3d->screen->instances, 0);
-	cub3d_init_img(cub3d, pars);
 	cub3d->minimap = mlx_new_image(cub3d->mlx, MINIMAP_SIZE, MINIMAP_SIZE);
 	mlx_image_to_window(cub3d->mlx, cub3d->minimap, 25, 25);
 	mlx_set_instance_depth(cub3d->minimap->instances, 2);
