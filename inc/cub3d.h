@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 03:10:17 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 04:08:24 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ bool		is_space_line(char *line);
 
 // Utils
 void		error_mlx(void);
-mlx_image_t	*get_mlx_img(t_cub3d *cub3d, t_parsing *pars, char *file_path);
+void		delete_textures_array(mlx_texture_t **to_delete);
 uint32_t	get_rgba(uint8_t r, uint8_t g, uint8_t b, bool shadow);
 
 // Free

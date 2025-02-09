@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:37:21 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 03:25:03 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 03:48:09 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	minimap(t_cub3d *cub3d)
 			minimap_in_loop_calc(minimap, map_x, map_y);
 			if ((minimap->dist_x * minimap->dist_x
 					+ minimap->dist_y * minimap->dist_y)
-				<= (minimap->radius * minimap->radius))
+				< (minimap->radius * minimap->radius))
 				mlx_put_pixel(cub3d->minimap,
 					minimap->x, MINIMAP_SIZE - minimap->y,
 					get_minimap_color(cub3d, map_x, map_y));
