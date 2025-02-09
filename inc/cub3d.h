@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 23:36:02 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:05:30 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void		rotate(t_cub3d *cub3d, double rot_speed);
 // Display
 void		set_visuals(t_cub3d *cub3d);
 void		draw_crosshair(t_cub3d *cub3d);
-void		put_AWP_anim_to_window(t_cub3d *cub3d);
+void		put_awp_anim_to_window(t_cub3d *cub3d);
 void		minimap(t_cub3d *cub3d);
 
 // Raycasting

@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:25:53 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/08 23:36:49 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 00:12:57 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	cub3d_init_img(t_cub3d *cub3d, t_parsing *pars)
 	}
 	cub3d->frames[i] = NULL ;
 }
-
+// TODO: load png before mlx_init, then change what happens in failure case
 t_cub3d	*cub3d_init(t_parsing *pars)
 {
 	t_cub3d	*cub3d ;
