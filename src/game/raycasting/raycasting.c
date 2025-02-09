@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 02:47:21 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:03:14 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ void	raycasting(t_cub3d *cub3d)
 		draw_line(cub3d, raycast, x);
 		x++ ;
 	}
-	minimap(cub3d);
+	minimap(cub3d->minimap, cub3d);
 }

@@ -6,30 +6,18 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:37:21 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 03:48:09 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:02:29 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_minimap	*minimap_init(t_cub3d *cub3d)
+static void	calc_minimap(t_minimap *minimap, t_cub3d *cub3d)
 {
-	t_minimap	*minimap ;
-
-	minimap = malloc(sizeof(t_minimap));
-	minimap->x = 0 ;
-	minimap->y = 0 ;
 	minimap->play_x = cub3d->raycast->pos->x ;
 	minimap->play_y = cub3d->raycast->pos->y ;
 	minimap->angle = atan2(cub3d->raycast->dir->y, cub3d->raycast->dir->x);
-	minimap->radius = MINIMAP_SIZE / 2 ;
-	minimap->center = MINIMAP_SIZE / 2 ;
 	minimap->map_size = fmax(cub3d->map_width, cub3d->map_height);
-	minimap->rot_x = 0 ;
-	minimap->rot_y = 0 ;
-	minimap->dist_x = 0 ;
-	minimap->dist_y = 0 ;
-	return (minimap);
 }
 
 static void	minimap_in_loop_calc(t_minimap *minimap, double map_x, double map_y)
@@ -61,15 +49,14 @@ static uint32_t	get_minimap_color(t_cub3d *cub3d, double map_x, double map_y)
 		return (GRAY);
 }
 
-void	minimap(t_cub3d *cub3d)
+void	minimap(t_minimap *minimap, t_cub3d *cub3d)
 {
-	t_minimap	*minimap ;
 	double		map_x ;
 	double		map_y ;
 
-	minimap = minimap_init(cub3d);
-	ft_memset(cub3d->minimap->pixels, 0x00,
-		cub3d->minimap->width * cub3d->minimap->height * 4 * sizeof(uint8_t));
+	calc_minimap(minimap, cub3d);
+	ft_memset(minimap->img->pixels, 0x00,
+		minimap->img->width * minimap->img->height * 4 * sizeof(uint8_t));
 	map_y = 0 ;
 	while (map_y < cub3d->map_height)
 	{
@@ -80,12 +67,11 @@ void	minimap(t_cub3d *cub3d)
 			if ((minimap->dist_x * minimap->dist_x
 					+ minimap->dist_y * minimap->dist_y)
 				< (minimap->radius * minimap->radius))
-				mlx_put_pixel(cub3d->minimap,
+				mlx_put_pixel(minimap->img,
 					minimap->x, MINIMAP_SIZE - minimap->y,
 					get_minimap_color(cub3d, map_x, map_y));
 			map_x += 0.02 ;
 		}
 		map_y += 0.02 ;
 	}
-	free(minimap);
 }

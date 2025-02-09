@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 04:08:24 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:02:44 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,25 +121,26 @@ typedef struct s_cub3d
 	mlx_image_t			*screen;
 	mlx_image_t			**txtrs;
 	mlx_image_t			**frames;
-	mlx_image_t			*minimap;
 	int					frame;
 	struct s_raycasting	*raycast;
+	struct s_minimap	*minimap;
 }	t_cub3d;
 
 typedef struct s_minimap
 {
-	int		x;
-	int		y;
-	double	play_x;
-	double	play_y;
-	double	angle;
-	int		radius;
-	int		center;
-	double	map_size;
-	double	rot_x;
-	double	rot_y;
-	int		dist_x;
-	int		dist_y;
+	mlx_image_t	*img;
+	int			x;
+	int			y;
+	double		play_x;
+	double		play_y;
+	double		angle;
+	int			radius;
+	int			center;
+	double		map_size;
+	double		rot_x;
+	double		rot_y;
+	int			dist_x;
+	int			dist_y;
 }	t_minimap;
 
 /*** FUNCTIONS ***/
@@ -185,6 +186,7 @@ t_txtr_id	get_player_direction(char **map);
 // Init
 t_cub3d		*cub3d_init(t_parsing *pars);
 t_raycast	*raycast_init(t_parsing *pars);
+t_minimap	*minimap_init(t_cub3d *cub3d);
 t_point		*point_init(int x, int y);
 t_vector	*vector_init(double x, double y);
 
@@ -200,7 +202,7 @@ void		rotate(t_cub3d *cub3d, double rot_speed);
 void		set_visuals(t_cub3d *cub3d);
 void		draw_crosshair(t_cub3d *cub3d);
 void		put_awp_anim_to_window(t_cub3d *cub3d);
-void		minimap(t_cub3d *cub3d);
+void		minimap(t_minimap *minimap, t_cub3d *cub3d);
 
 // Raycasting
 void		raycasting(t_cub3d *cub3d);
