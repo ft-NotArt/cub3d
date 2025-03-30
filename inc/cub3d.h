@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/19 16:54:33 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 07:56:53 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@
 # define MINIMAP_SIZE 250
 
 // Colors
-# define BLACK 0x000000FF
-# define GRAY 0xC5C6C780
-# define RED 0xFF0000FF
-# define GREEN 0x00FF00FF
-# define BLUE 0x0000FFFF
+# define INVIS	0x00000000
+# define BLACK	0x000000FF
+# define GRAY	0xC5C6C780
+# define RED	0xFF0000FF
+# define GREEN	0x00FF00FF
+# define BLUE	0x0000FFFF
 
 /*** TYPEDEF ***/
 

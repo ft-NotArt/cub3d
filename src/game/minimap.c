@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:37:21 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 20:02:29 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 07:57:17 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static uint32_t	get_minimap_color(t_cub3d *cub3d, double map_x, double map_y)
 		return (BLUE);
 	else if (map_char == 'd')
 		return (GREEN);
-	else
+	else if (map_char == '0')
 		return (GRAY);
+	else
+		return (INVIS);
 }
 
 void	minimap(t_minimap *minimap, t_cub3d *cub3d)
