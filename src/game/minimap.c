@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:37:21 by anoteris          #+#    #+#             */
-/*   Updated: 2025/03/30 07:57:17 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 09:20:00 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ static void	calc_minimap(t_minimap *minimap, t_cub3d *cub3d)
 	minimap->play_x = cub3d->raycast->pos->x ;
 	minimap->play_y = cub3d->raycast->pos->y ;
 	minimap->angle = atan2(cub3d->raycast->dir->y, cub3d->raycast->dir->x);
+	minimap->cos_angle = cos(minimap->angle);
+	minimap->sin_angle = sin(minimap->angle);
 	minimap->map_size = fmax(cub3d->map_width, cub3d->map_height);
 }
 
 static void	minimap_in_loop_calc(t_minimap *minimap, double map_x, double map_y)
 {
-	minimap->rot_x = cos(minimap->angle) * (map_x - minimap->play_x)
-		- sin(minimap->angle) * (map_y - minimap->play_y) + minimap->play_x ;
-	minimap->rot_y = sin(minimap->angle) * (map_x - minimap->play_x)
-		+ cos(minimap->angle) * (map_y - minimap->play_y) + minimap->play_y ;
+	minimap->rot_x = minimap->cos_angle * (map_x - minimap->play_x)
+		- minimap->sin_angle * (map_y - minimap->play_y) + minimap->play_x ;
+	minimap->rot_y = minimap->sin_angle * (map_x - minimap->play_x)
+		+ minimap->cos_angle * (map_y - minimap->play_y) + minimap->play_y ;
 	minimap->x = (minimap->rot_y - minimap->play_y) * MINIMAP_SIZE
 		/ minimap->map_size + minimap->center ;
 	minimap->y = (minimap->rot_x - minimap->play_x) * MINIMAP_SIZE

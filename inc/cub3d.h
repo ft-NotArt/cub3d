@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/03/30 07:56:53 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 08:09:53 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_minimap
 	double		play_x;
 	double		play_y;
 	double		angle;
+	double		cos_angle;
+	double		sin_angle;
 	int			radius;
 	int			center;
 	double		map_size;

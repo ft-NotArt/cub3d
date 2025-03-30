@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:28:28 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 19:59:08 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 08:11:16 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ t_minimap	*minimap_init(t_cub3d *cub3d)
 	minimap->play_x = 0 ;
 	minimap->play_y = 0 ;
 	minimap->angle = 0 ;
+	minimap->cos_angle = 0 ;
+	minimap->sin_angle = 0 ;
 	minimap->radius = MINIMAP_SIZE / 2 ;
 	minimap->center = MINIMAP_SIZE / 2 ;
 	minimap->map_size = 0 ;

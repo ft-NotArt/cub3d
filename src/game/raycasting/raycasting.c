@@ -6,7 +6,7 @@
 /*   By: anoteris <noterisarthur42@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:40:26 by anoteris          #+#    #+#             */
-/*   Updated: 2025/02/09 20:03:14 by anoteris         ###   ########.fr       */
+/*   Updated: 2025/03/30 09:24:55 by anoteris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	raycasting(t_cub3d *cub3d)
 	t_raycast	*raycast ;
 	double		camera_x ;
 	int			x ;
+	static int	frame = 0 ;
 
 	raycast = cub3d->raycast ;
 	draw_background(cub3d, raycast, cub3d->txtrs[FL], cub3d->txtrs[CE]);
@@ -101,5 +102,7 @@ void	raycasting(t_cub3d *cub3d)
 		draw_line(cub3d, raycast, x);
 		x++ ;
 	}
-	minimap(cub3d->minimap, cub3d);
+	if (frame % 3 == 0)
+		minimap(cub3d->minimap, cub3d);
+	frame++ ;
 }
