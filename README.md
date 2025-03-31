@@ -4,19 +4,21 @@
 
 <br>
 
-## Demo
+## 🎬 Demo
 
-https://github.com/user-attachments/assets/6419285b-3147-4c1b-95f4-867941bd697f
+
+https://github.com/user-attachments/assets/2ab83448-29d8-42b9-848d-cc14b33739d2
+
 
 <br>
 
-## Gameplay
+## 🎮 Gameplay
 
 First thing you see in the game is that beautiful **AWP**\
 Of course you can shoot with it, it has the ability to break doors from across the map !\
 You could still choose to open and close them more calmly when you're near them
 
-## Commands
+## ⌨️ Commands
 
 Here's every command for the game :
 - **WASD** to move
@@ -25,7 +27,7 @@ Here's every command for the game :
 - **Space** to open/close doors
 - **ESC** to leave the game
 
-## Compilation
+## ⚙️ Compilation
 To compile our project, use the `make` command\
 That will make the game launch in *fullscreen*\
 \
